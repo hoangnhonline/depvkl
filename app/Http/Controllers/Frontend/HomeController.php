@@ -34,8 +34,12 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     {  
+        $articleCateHot = ArticlesCate::where('is_hot', 1)->orderBy('id', 'asc')->get();
+        foreach($articleCateHot as $cate){
+            $postArr[$cate->id] = Articles::where('cate_id', $cate->id)->where('status', 1)->limit(12)->get();
+        }
         $seo['title'] = $seo['description'] =$seo['keywords'] = "DepVKL.us";
-        return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo', 'productArr'));
+        return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo', 'articleCateHot', 'postArr'));
 
     }
 

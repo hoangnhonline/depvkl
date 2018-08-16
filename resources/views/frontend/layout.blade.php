@@ -48,7 +48,7 @@
          <!-- HEADER -->
          <div class="row header-top">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8">
-               <a class="main-logo" href="#"><img src="{{ URL::asset('public/assets/img/main-logo.png') }}" class="main-logo img-responsive" alt="Muvee Reviews" title="Muvee Reviews"></a>
+               <a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logo.png') }}" class="main-logo img-responsive" alt="Muvee Reviews" title="Muvee Reviews"></a>
             </div>
             <div class="col-lg-8 hidden-md text-center hidden-sm hidden-xs">
                <img src="{{ URL::asset('public/assets/img/banners/banner-sm.jpg') }}" class="img-responsive" alt="Muvee Reviews Video Magazine HTML5 Bootstrap">
@@ -57,17 +57,9 @@
          </div>
          @include('frontend.partials.menu')   
          <!-- CORE -->
-         <div class="row">           
-            <div class="col-lg-12 col-md-12">
-                 <div class="container text-center">
-                  <!-- BOTTOM ADVERTISE BOX -->
-                  <a href="http://themeforest.net/user/orcasthemes/portfolio?ref=orcasthemes" class="banner-xl">
-                  <img src="{{ URL::asset('public/assets/img/banners/banner-xl.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
-                  </a>     
-               </div>
+         
                @yield('content')
-            </div>
-         </div>
+            
       </div>               
       </div>     
       
