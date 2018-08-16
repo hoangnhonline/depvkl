@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ArticlesCate;
-use App\Models\Tag;
-use App\Models\TagObjects;
 use App\Models\Articles;
 use App\Models\MetaData;
-use App\Models\Rating;
+use App\Models\Post;
 
 use Helper, File, Session, Auth, Image;
 
@@ -29,7 +27,7 @@ class ArticlesController extends Controller
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
-        $query = Articles::where('type', 1);
+        $query = Articles::where('status', 1);
 
         if( $cate_id > 0){
             $query->where('cate_id', $cate_id);
@@ -44,11 +42,22 @@ class ArticlesController extends Controller
 
         $items = $query->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(20);
         
-        $cateArr = ArticlesCate::where('type', 1)->get();
+        $cateArr = ArticlesCate::where('status', 1)->get();
         
         return view('backend.articles.index', compact( 'items', 'cateArr' , 'title', 'cate_id' ));
     }
-
+    public function check($image_url){
+         $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1" );
+        curl_setopt( $ch, CURLOPT_URL, $image_url );
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($ch);       
+        $code =  curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $code;
+    }
     /**
     * Show the form for creating a new resource.
     *
@@ -56,14 +65,21 @@ class ArticlesController extends Controller
     */
     public function create(Request $request)
     {
+        set_time_limit(10000);
+        $arr = Articles::offset(0)->limit(10000)->get();
+        foreach($arr as $a){
+            $code = $this->check($a->image_url);
+            var_dump($code, $a->image_url);
+            echo "<br>";
+            if($code != 200){
+                $a->delete();
+            }
+        }
+        $cateArr = ArticlesCate::where('status', 1)->get();
         
-        $cateArr = ArticlesCate::where('type', 1)->get();
-        
-        $cate_id = $request->cate_id;
+        $cate_id = $request->cate_id;       
 
-        $tagArr = Tag::where('type', 2)->orderBy('id', 'desc')->get();
-
-        return view('backend.articles.create', compact( 'tagArr', 'cateArr', 'cate_id'));
+        return view('backend.articles.create', compact( 'cateArr', 'cate_id'));
     }
 
     /**
@@ -102,26 +118,7 @@ class ArticlesController extends Controller
 
         $this->storeMeta( $object_id, 0, $dataArr);
 
-        // xu ly tags
-        if( !empty( $dataArr['tags'] ) && $object_id ){
-            
-
-            foreach ($dataArr['tags'] as $tag_id) {
-                $model = new TagObjects;
-                $model->object_id = $object_id;
-                $model->tag_id  = $tag_id;
-                $model->type = 2;
-                $model->save();
-            }
-        }
-
-        // store Rating
-        for($i = 1; $i <= 5 ; $i++ ){
-            $amount = $i == 5 ? 1 : 0;
-            Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 2, 'amount' => $amount]);
-        }
-
-        Session::flash('message', 'Tạo mới thành công');
+        Session::flash('message', 'Success.');
 
         return redirect()->route('articles.index',['cate_id' => $dataArr['cate_id']]);
     }
@@ -164,28 +161,15 @@ class ArticlesController extends Controller
         $tagSelected = [];
 
         $detail = Articles::find($id);
-        if( Auth::user()->role < 3 ){
-            if($detail->created_user != Auth::user()->id){
-                return redirect()->route('courses.index');
-            }
-        }
-        $cateArr = ArticlesCate::where('type', 1)->get();    
+       
+        $cateArr = ArticlesCate::where('status', 1)->get();    
 
-        $tmpArr = TagObjects::where(['type' => 2, 'object_id' => $id])->get();
-        
-        if( $tmpArr->count() > 0 ){
-            foreach ($tmpArr as $value) {
-                $tagSelected[] = $value->tag_id;
-            }
-        }
-        
-        $tagArr = Tag::where('type', 2)->get();
         $meta = (object) [];
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
         }
 
-        return view('backend.articles.edit', compact('tagArr', 'tagSelected', 'detail', 'cateArr', 'meta'));
+        return view('backend.articles.edit', compact('detail', 'cateArr', 'meta'));
     }
 
     /**
@@ -222,20 +206,8 @@ class ArticlesController extends Controller
         $model->update($dataArr);
         
         $this->storeMeta( $dataArr['id'], $dataArr['meta_id'], $dataArr);
-
-        TagObjects::where(['object_id' => $dataArr['id'], 'type' => 2])->delete();
-        // xu ly tags
-        if( !empty( $dataArr['tags'] ) ){
-                       
-            foreach ($dataArr['tags'] as $tag_id) {
-                $modelTagObject = new TagObjects; 
-                $modelTagObject->object_id = $dataArr['id'];
-                $modelTagObject->tag_id  = $tag_id;
-                $modelTagObject->type = 2;
-                $modelTagObject->save();
-            }
-        }
-        Session::flash('message', 'Cập nhật thành công');        
+      
+        Session::flash('message', 'Success.');        
 
         return redirect()->route('articles.edit', $dataArr['id']);
     }

@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Thông tin trang
+    Category
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'info-seo.index' ) }}">Thông tin trang</a></li>
+    <li><a href="{{ route( 'articles-cate.index' ) }}">Category</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,24 +20,20 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('info-seo.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>    
+      <a href="{{ route('articles-cate.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="box">
 
         <div class="box-header with-border">
-          <h3 class="box-title">Danh sách ( <span class="value">{{ $items->total() }} trang )</span></h3>
+          <h3 class="box-title">Danh sách</h3>
         </div>
         
         <!-- /.box-header -->
         <div class="box-body">
-            
           <table class="table table-bordered" id="table-list-data">
             <tr>
-              <th style="width: 1%">#</th>                            
-              <th>Image</th>
-              <th>URL</th>
-              <th>Meta title</th>
-              <th>Meta description</th>
-              <th>Meta keywords</th>              
+              <th style="width: 1%">#</th>
+              <th style="width: 1%;white-space:nowrap">Thứ tự</th>
+              <th>Tên</th>                                         
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -46,22 +42,27 @@
               @foreach( $items as $item )
                 <?php $i ++; ?>
               <tr id="row-{{ $item->id }}">
-                <td><span class="order">{{ $i }}</span></td>      
-                <td>
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="80">
-                </td>        
-                <td>                  
-                  <a href="{{ route( 'info-seo.edit', [ 'id' => $item->id ]) }}">{{ $item->url }}</a>                  
+                <td><span class="order">{{ $i }}</span></td>
+                <td style="vertical-align:middle;text-align:center">
+                  <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->description }}</td>
-                <td>{{ $item->keywords }}</td>
-                <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'info-seo.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                <td>                  
+                  <a href="{{ route( 'articles-cate.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'info-seo.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
-                  
-                  
+                  @if( $item->is_hot == 1 )
+                  <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
+                  @endif
+
+                  <p>{{ $item->description }}</p>
+                </td>                
+                <td style="white-space:nowrap">
+                
+                <a class="btn btn-default btn-sm" href="{{ route('news-list', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+                  <a class="btn btn-primary btn-sm" href="{{ route('articles.index', ['id' => $item->id])}}" ><span class="badge">{{ $item->articles->count() }}</span> Video </a>
+                  <a href="{{ route( 'articles-cate.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                  @if( $item->articles->count() == 0)
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'articles-cate.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                  @endif
                 </td>
               </tr> 
               @endforeach
@@ -73,7 +74,6 @@
 
           </tbody>
           </table>
-           
         </div>        
       </div>
       <!-- /.box -->     
@@ -101,22 +101,6 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
-  $('#parent_id').change(function(){
-    $.ajax({
-        url: $('#route_get_cate_by_parent').val(),
-        type: "POST",
-        async: false,
-        data: {          
-            parent_id : $(this).val(),
-            type : 'list'
-        },
-        success: function(data){
-            $('#cate_id').html(data).select2('refresh');                      
-        }
-    });
-  });
-  $('.select2').select2();
-
   $('#table-list-data tbody').sortable({
         placeholder: 'placeholder',
         handle: ".move",

@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
-  <title>thanhphuthinhland | Dashboard</title>
+  <title>depvkl.us | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
   
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{ URL::asset('backend/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('public/admin/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -22,7 +22,7 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/skins/_all-skins.min.css') }}">
   <!-- iCheck -->
-  <link rel="stylesheet" href="{{ URL::asset('backend/plugins/iCheck/flat/blue.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('public/admin/plugins/iCheck/flat/blue.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/sweetalert2.min.css') }}">  
 
@@ -60,13 +60,12 @@
         </form>
     </div>
 </div>
-@include('backend.customer.customer-notification-modal')
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.5
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="mailto:hoangnhonline@gmail.com">hoangnhonline@gmail.com</a>.</strong> All rights
+    <strong>Copyright &copy; 2014-2016 <a href="mailto:xxxxx@gmail.com">xxxxx@gmail.com</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -80,15 +79,18 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="{{ URL::asset('backend/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
+<script src="{{ URL::asset('public/admin/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ URL::asset('https://code.jquery.com/ui/1.10.0/jquery-ui.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
+<script type="text/javascript">
+  var public_url = '{{ env('APP_URL') }}/public';
+</script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ URL::asset('backend/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('public/admin/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('public/admin/dist/js/ajax-upload.js') }}"></script>
 <script src="{{ URL::asset('public/admin/dist/js/form.js') }}"></script>
 <script src="{{ URL::asset('public/admin/dist/js/sweetalert2.min.js') }}"></script>
@@ -97,7 +99,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 
 <!-- Slimscroll -->
-<script src="{{ URL::asset('backend/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ URL::asset('public/admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::asset('public/admin/dist/js/app.min.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

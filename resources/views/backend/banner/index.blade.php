@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -20,9 +20,11 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
+      @if($arrSearch['object_id'] == 1 || $arrSearch['object_id'] == 5)
       <a href="{{ route('banner.create', ['object_id' => $arrSearch['object_id'], 'object_type' => $arrSearch['object_type']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px;" 
 
       >Tạo mới</a>
+      @endif
       @if($arrSearch['object_type'] == 3)
       <a class="btn btn-default btn-sm" href="{{ route('banner.list')}}" style="margin-bottom:5px;">Quay lại</a>
       @endif
@@ -38,7 +40,7 @@
             <tr>
               <th style="width: 1%">#</th>
               <th style="width: 1%;white-space:nowrap">Thứ tự</th>
-              <th style="width:500px">Banner</th>
+              <th style="width:400px">Banner</th>
               <th>Liên kết</th>
   
               <th width="1%;white-space:nowrap">Thao tác</th>
@@ -54,7 +56,7 @@
                   <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
-                  <img class="img-thumbnail banner" width="500" src="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" />
+                  <img class="img-thumbnail banner" width="400" src="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" />
                 </td>                                                             
                 <td>{{ $item->ads_url }}</td>
                 <td style="white-space:nowrap; text-align:right">                 
@@ -83,7 +85,7 @@
 <!-- /.content -->
 </div>
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({

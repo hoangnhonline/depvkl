@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -26,21 +26,7 @@
           <h3 class="panel-title">Bộ lọc</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('pages.index') }}">                        
-            @if($userList && Auth::user()->role > 1)
-              <div class="form-group">
-                <label>Người tạo</label>                
-                <?php $i = 0; ?>
-                <select class="form-control" name="created_user" id="created_user">
-                  <option value="">Tất cả</option>
-                  @foreach($userList as $us)
-                  <option value="{{ $us->id }}" {{ $created_user == $us->id ? "selected" : "" }}>{{ $us->full_name }}</option> 
-                  <?php $i++; ?>
-                  @endforeach
-                </select>
-                <div class="clearfix"></div>
-            </div>     
-            @endif
+          <form class="form-inline" role="form" method="GET" action="{{ route('pages.index') }}">                                    
             <div class="form-group">
               <label for="email">Từ khóa :</label>
               <input type="text" class="form-control" name="title" value="{{ $title }}">
@@ -61,8 +47,7 @@
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">#</th>                            
-              <th>Tiêu đề</th>
-              <th width="10%">Người tạo</th>
+              <th>Tiêu đề</th>              
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -82,7 +67,7 @@
 
                   <p>{{ $item->description }}</p>
                 </td>
-                <td>{{ $item->account->full_name }}</td>
+               
                 <td style="white-space:nowrap">   
                 
                   <a class="btn btn-default btn-sm" href="{{ route('danh-muc', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>               
@@ -113,7 +98,7 @@
 <!-- /.content -->
 </div>
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({

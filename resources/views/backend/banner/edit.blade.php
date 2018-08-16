@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li><a href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type]) }}">banner</a></li>
-      Cập nhật
+      <li class="active"><span class="glyphicon glyphicon-pencil"></span></li>
     </ol>
   </section>
 
@@ -40,15 +40,7 @@
                   </div>
               @endif              
                  <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Banner <?php 
-                  if($object_id == 1){
-                    echo "( 1349 x 505 px)";
-                  }elseif($object_id == 5){
-                    echo "( 1349 x 200 px)";
-                  }elseif($object_id == 2){
-                    echo "( 1150 x 60 px)";
-                  }
-                  ?></label>  
+                  <label class="col-md-3 row">Banner </label>  
                   <input type="hidden" name="id" value="{{ $detailBanner->id }}">  
                   <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ $detailBanner->image_url ? Helper::showImage($detailBanner->image_url) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
@@ -58,8 +50,14 @@
                     <button class="btn btn-default btn-sm" id="btnUploadImage" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
-                </div>        
-                <input type="hidden" name="status" value="1">       
+                </div>  
+                <div class="form-group">
+                  <label>Ẩn / Hiện</label>
+                  <select name="status" class="form-control" id="status">
+                  	<option value="1" {{ $detailBanner->status == 1  ? "selected" : "" }}>Hiện</option>
+                  	<option value="2" {{ $detailBanner->status == 2  ? "selected" : "" }}>Ẩn</option>
+                  </select>
+                </div>           
                 <!-- textarea -->
                 <div class="form-group">
                   <label>Loại banner</label>
@@ -96,26 +94,12 @@
 </div>
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
-var h = screen.height;
-var w = screen.width;
-var left = (screen.width/2)-((w-300)/2);
-var top = (screen.height/2)-((h-100)/2);
-function openKCFinder_singleFile() {
-      window.KCFinder = {};
-      window.KCFinder.callBack = function(url) {
-         $('#image_url').val(url);
-         $('#thumbnail_image').attr('src', $('#app_url').val() + url);
-          window.KCFinder = null;
-      };
-      window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
-  }
     $(document).ready(function(){
       
       $('#btnUploadImage').click(function(){        
-        //$('#file-image').click();
-        openKCFinder_singleFile();
+        $('#file-image').click();
       });      
       var files = "";
       $('#file-image').change(function(e){

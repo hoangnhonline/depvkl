@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -68,6 +68,10 @@
                   <input type="text" class="form-control" name="hotline" id="hotline" value="{{ $settingArr['hotline'] }}">
                 </div>
                 <div class="form-group">
+                  <label>Giới thiệu sơ lược</label>
+                  <textarea class="form-control" rows="3" name="gioi_thieu_so_luoc" id="gioi_thieu_so_luoc">{{ $settingArr['gioi_thieu_so_luoc'] }}</textarea>
+                </div>
+                <div class="form-group">
                   <label>Thông tin footer</label>
                   <textarea class="form-control" rows="3" name="cty_info" id="cty_info">{{ $settingArr['cty_info'] }}</textarea>
                 </div>
@@ -79,30 +83,41 @@
                   <label>Code google analystic </label>
                   <input type="text" class="form-control" name="google_analystic" id="google_analystic" value="{{ $settingArr['google_analystic'] }}">
                 </div>   
-               
-                <div style="clear:both"></div> 
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Logo </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_logo" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-logo" width="150" >                 
-                    <button class="btn btn-default btnSingleUpload" data-set="logo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <img id="thumbnail_logo" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-logo" width="150" >
+                    
+                    <input type="file" id="file-logo" style="display:none" />
+                 
+                    <button class="btn btn-default btn-sm" id="btnUploadLogo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
-                
+                <div style="clear:both"></div> 
+                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                  <label class="col-md-3 row">Favicon </label>    
+                  <div class="col-md-9">
+                    <img id="thumbnail_favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="50">
+                    
+                    <input type="file" id="file-favicon" style="display:none" />
+                 
+                    <button class="btn btn-default btn-sm" id="btnUploadFavicon" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                  <div style="clear:both"></div>
+                </div>
                 <div style="clear:both"></div> 
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Banner ( og:image ) </label>    
                   <div class="col-md-9">
                     <img id="thumbnail_banner" src="{{ $settingArr['banner'] ? Helper::showImage($settingArr['banner']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-banner" width="200">
+                    
+                    <input type="file" id="file-banner" style="display:none" />
                  
-                    <button class="btn btn-default btnSingleUpload" data-set="banner" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm" id="btnUploadBanner" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
-                <div style="clear:both"></div>     
-                </div>
-                <div style="clear:both"></div>  
                 <div style="clear:both"></div>            
                  
             </div>                        
@@ -161,17 +176,27 @@
 </div>
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
     $(document).ready(function(){
       var editor = CKEDITOR.replace( 'cty_info',{
           language : 'vi',
-          filebrowserBrowseUrl: "{{ URL::asset('/admin/dist/js/kcfinder/browse.php?type=files') }}",
-          filebrowserImageBrowseUrl: "{{ URL::asset('/admin/dist/js/kcfinder/browse.php?type=images') }}",
-          filebrowserFlashBrowseUrl: "{{ URL::asset('/admin/dist/js/kcfinder/browse.php?type=flash') }}",
-          filebrowserUploadUrl: "{{ URL::asset('/admin/dist/js/kcfinder/upload.php?type=files') }}",
-          filebrowserImageUploadUrl: "{{ URL::asset('/admin/dist/js/kcfinder/upload.php?type=images') }}",
-          filebrowserFlashUploadUrl: "{{ URL::asset('/admin/dist/js/kcfinder/upload.php?type=flash') }}",
+          filebrowserBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=files') }}",
+          filebrowserImageBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=images') }}",
+          filebrowserFlashBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=flash') }}",
+          filebrowserUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=files') }}",
+          filebrowserImageUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=images') }}",
+          filebrowserFlashUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=flash') }}",
+          height : 300
+      });
+      var editor2 = CKEDITOR.replace( 'gioi_thieu_so_luoc',{
+          language : 'vi',
+          filebrowserBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=files') }}",
+          filebrowserImageBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=images') }}",
+          filebrowserFlashBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=flash') }}",
+          filebrowserUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=files') }}",
+          filebrowserImageUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=images') }}",
+          filebrowserFlashUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=flash') }}",
           height : 300
       });
       $('#btnUploadLogo').click(function(){        

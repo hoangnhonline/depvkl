@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -91,7 +91,7 @@
 <!-- /.content -->
 </div>
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({

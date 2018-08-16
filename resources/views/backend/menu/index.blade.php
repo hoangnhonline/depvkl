@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -43,7 +43,7 @@
                   <div class="panel-heading" role="tab" id="headingTwo">
                     <h4 class="panel-title">
                       <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        Danh mục bài viết
+                        Category
                       </a>
                     </h4>
                   </div>
@@ -226,7 +226,7 @@
   }
 </style>
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
     $(document).ready(function(){    
        $( "#loadMenu" ).sortable({

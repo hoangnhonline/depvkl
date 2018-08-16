@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.datetimepicker.min.css') }}">  
 <div class="content-wrapper">
@@ -150,7 +150,7 @@
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.datetimepicker.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){

@@ -4,12 +4,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Thông tin trang
+    Video
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'info-seo.index' ) }}">Thông tin trang</a></li>
-    <li class="active">Danh sách</li>
+    <li><a href="{{ route( 'articles.index' ) }}">Video</a></li>
+    <li class="active">List</li>
   </ol>
 </section>
 
@@ -20,25 +20,49 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('info-seo.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>    
+      <a href="{{ route('articles.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">New video</a>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Search</h3>
+        </div>
+        <div class="panel-body">
+          <form class="form-inline" role="form" method="GET" action="{{ route('articles.index') }}">            
+            <div class="form-group">
+              <label for="email">Category </label>
+              <select class="form-control" name="cate_id" id="cate_id">
+                <option value="">--All--</option>
+                @if( $cateArr->count() > 0)
+                  @foreach( $cateArr as $value )
+                  <option value="{{ $value->id }}" {{ $value->id == $cate_id ? "selected" : "" }}>{{ $value->name }}</option>
+                  @endforeach
+                @endif
+              </select>
+            </div>            
+            <div class="form-group">
+              <label for="email">&nbsp;&nbsp;Keyword :</label>
+              <input type="text" class="form-control" name="title" value="{{ $title }}">
+            </div>
+            <button type="submit" class="btn btn-default btn-sm">Filter</button>
+          </form>         
+        </div>
+      </div>
       <div class="box">
 
         <div class="box-header with-border">
-          <h3 class="box-title">Danh sách ( <span class="value">{{ $items->total() }} trang )</span></h3>
+          <h3 class="box-title">List ( <span class="value">{{ $items->total() }} videos )</span></h3>
         </div>
         
         <!-- /.box-header -->
         <div class="box-body">
-            
+          <div style="text-align:center">
+            {{ $items->appends( ['cate_id' => $cate_id, 'title' => $title] )->links() }}
+          </div>  
           <table class="table table-bordered" id="table-list-data">
             <tr>
-              <th style="width: 1%">#</th>                            
-              <th>Image</th>
-              <th>URL</th>
-              <th>Meta title</th>
-              <th>Meta description</th>
-              <th>Meta keywords</th>              
-              <th width="1%;white-space:nowrap">Thao tác</th>
+              <th style="width: 1%">#</th>              
+              <th width="120px">Thumbnail</th>
+              <th>Title</th>
+              <th width="1%;white-space:nowrap">Action</th>
             </tr>
             <tbody>
             @if( $items->count() > 0 )
@@ -46,34 +70,39 @@
               @foreach( $items as $item )
                 <?php $i ++; ?>
               <tr id="row-{{ $item->id }}">
-                <td><span class="order">{{ $i }}</span></td>      
+                <td><span class="order">{{ $i }}</span></td>       
                 <td>
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="80">
+                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
                 </td>        
                 <td>                  
-                  <a href="{{ route( 'info-seo.edit', [ 'id' => $item->id ]) }}">{{ $item->url }}</a>                  
+                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
+                  
+                  @if( $item->is_hot == 1 )
+                  <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
+                  @endif
+
+                  <p>{{ $item->description }}</p>
                 </td>
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->description }}</td>
-                <td>{{ $item->keywords }}</td>
-                <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'info-seo.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                <td style="white-space:nowrap"> 
+                  <a class="btn btn-default btn-sm" href="{{ route('news-detail', [$item->slug, $item->id ]) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> View</a>                 
+                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
                   
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'info-seo.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
-                  
+                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'articles.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
                   
                 </td>
               </tr> 
               @endforeach
             @else
             <tr>
-              <td colspan="9">Không có dữ liệu.</td>
+              <td colspan="9">No data.</td>
             </tr>
             @endif
 
           </tbody>
           </table>
-           
+          <div style="text-align:center">
+            {{ $items->appends( ['cate_id' => $cate_id, 'title' => $title] )->links() }}
+          </div>  
         </div>        
       </div>
       <!-- /.box -->     
@@ -85,6 +114,7 @@
 </div>
 @stop
 @section('javascript_page')
+
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({

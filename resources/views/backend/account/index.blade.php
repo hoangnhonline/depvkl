@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -21,7 +21,7 @@
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
       <a href="{{ route('account.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
-      @if(Auth::user()->role == 1)
+      @if(Auth::user()->role == 3)
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
@@ -32,15 +32,24 @@
             <label>Role</label>
             <select class="form-control" name="role" id="role">      
               <option value="" >--Tất cả--</option>                       
-              
-              <option value="1" {{ $role == 1 ? "selected" : "" }}>Admin</option>                                      
-                    <option value="2" {{ $role == 2 ? "selected" : "" }}>CSKH</option> 
-                    <option value="3" {{ $role == 3 ? "selected" : "" }}>PR</option>
-                    <option value="4" {{ $role == 4 ? "selected" : "" }}>CS CTV</option>
-                    <option value="5" {{ $role == 5 ? "selected" : "" }}>CTV</option>
-                    <option value="6" {{ $role == 6 ? "selected" : "" }}>Sản phẩm</option>              
+              <option value="1" {{ $role == 1 ? "selected" : "" }}>Editor</option>
+              <option value="2" {{ $role == 2 ? "selected" : "" }}>Mod</option> 
+              <option value="3" {{ $role == 3 ? "selected" : "" }}>Admin</option>
             </select>
-          </div>          
+          </div>
+          @if($role == 1)
+          <div class="form-group">
+              <label>Mod</label>
+              <select class="form-control" name="leader_id" id="leader_id">
+                <option value="">--Tất cả--</option>
+                @if($modList)
+                  @foreach($modList as $mod)
+                <option value="{{ $mod->id }}" {{ $leader_id == $mod->id ? "selected" : "" }}>{{ $mod->full_name }}</option> 
+                  @endforeach
+                @endif                                
+              </select>
+            </div> 
+            @endif
           </form>
       </div>
       </div>
@@ -75,7 +84,7 @@
                     <a href="{{ route( 'account.edit', [ 'id' => $item->id ]) }}">{{ $item->full_name }}</a>                                
                   </td>
                   <td>{{ $item->email }}</td>
-                  <td>{{ Helper::getRole($item->role) }}</td>
+                  <td>{{ $item->role == 1 ? "Editor"  : ($item->role == 2 ? "Mod" : "Admin" ) }}</td>
                   <td>{{ $item->status == 1 ? "Mở"  : "Khóa" }}</td>
                   <td style="white-space:nowrap">  
                     <a href="{{ route( 'account.update-status', ['status' => $item->status == 1 ? 2 : 1 , 'id' => $item->id ])}}" class="btn btn-sm {{ $item->status == 1 ? "btn-warning" : "btn-info" }}" 
@@ -110,7 +119,7 @@
 <!-- /.content -->
 </div>
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({

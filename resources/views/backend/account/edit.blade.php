@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -48,47 +48,32 @@
                  <div class="form-group">
                   <label>Email <span class="red-star">*</span></label>
                   <input type="text" class="form-control" readonly="true" name="email" id="email" value="{{ $detail->email }}">
-                </div>                                        
-                <div class="form-group">
-                  <label>CMND <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="cmnd" id="cmnd" value="{{ old('cmnd',$detail->cmnd) }}">
                 </div>
-                <div class="form-group">
-                  <label>Số điện thoại <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone',$detail->phone) }}">
-                </div>
-                <div class="form-group">
-                  <label>Địa chỉ <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="address" id="address" value="{{ old('address',$detail->address) }}">
-                </div>
-                <div class="form-group">
-                  <label>Thông tin ngân hàng <span class="red-star">*</span></label>
-                  <textarea class="form-control" name="bank_info" id="bank_info">{{ old('bank_info',$detail->bank_info) }}</textarea>
-                </div>
-                @if(Auth::user()->role == 1)
+                                         
                 <div class="form-group">
                   <label>Role</label>
-                  <select class="form-control" name="role" id="role">      
-                    <option value="" >--Chọn role--</option>                       
-                    <option value="1" {{ old('role', $detail->role) == 1 ? "selected" : "" }}>Admin</option>                                      
-                    <option value="2" {{ old('role', $detail->role) == 2 ? "selected" : "" }}>CSKH</option> 
-                    <option value="3" {{ old('role', $detail->role) == 3 ? "selected" : "" }}>PR</option>
-                    <option value="4" {{ old('role', $detail->role) == 4 ? "selected" : "" }}>CS CTV</option>
-                    <option value="5" {{ old('role', $detail->role) == 5 ? "selected" : "" }}>CTV</option>               
-                    <option value="6" {{ old('role', $detail->role) == 6 ? "selected" : "" }}>Sản phẩm</option>                  
-                    
+                  <select class="form-control" name="role" id="role">                             
+                    <option value="1" {{ old('role', $detail->role) == 1 ? "selected" : "" }}>Editor</option>
+                    @if(Auth::user()->role == 3)                  
+                    <option value="2" {{ old('role', $detail->role) == 2 ? "selected" : "" }}>Mod</option>
+                    <option value="3" {{ old('role', $detail->role) == 3 ? "selected" : "" }}>Admin</option>
+                    @endif                    
                   </select>
+                </div>
+                @if(Auth::user()->role == 3)
+                <div class="form-group col-md-12" style="display:none" id="chon_mod">
+                  <p class="clearfix"><strong>Mod</strong></p>
+                  <div style="clear:both"></div>     
+                    @if($modList)
+                      @foreach($modList as $mod)
+                      <div class="checkbox col-md-4" style="margin-top:0px !important;">
+                        <input type="checkbox" id="mod{{$mod->id}}" name="mod_id[]" value="{{ $mod->id }}" {{ in_array($mod->id, $modSelected) ? "checked=checked" : "" }}>
+                        <label for="mod{{$mod->id}}">{{ $mod->full_name }}</label>
+                      </div>
+                      @endforeach
+                    @endif
                 </div> 
-                <div class="form-group" id="div_cs" style="display:none;">
-                  <label>Chăm sóc CTV</label>
-                  <select class="form-control" name="leader_id" id="leader_id">  
-                  <option value="">-- Chọn --</option>
-                    @foreach($csctvList as $cs)
-                    <option value="{{ $cs->id }}" {{ old('leader_id', $detail->leader_id) == $cs->id ? "selected" : "" }}>[CS{{ $cs->id }}] {{ $cs->full_name }} </option>
-                    @endforeach
-                    
-                  </select>
-                </div>               
+                @endif                   
                 <div class="form-group">
                   <label>Trạng thái</label>
                   <select class="form-control" name="status" id="status">                                      
@@ -96,7 +81,6 @@
                     <option value="2" {{ $detail->status == 2 ? "selected" : "" }}>Khóa</option>                    
                   </select>
                 </div>
-                @endif
             </div>
             <div class="box-footer">
               <button type="button" class="btn btn-default btn-sm" id="btnLoading" style="display:none"><i class="fa fa-spin fa-spinner"></i></button>
@@ -117,29 +101,27 @@
   <!-- /.content -->
 </div>
 @stop
-@section('js')
+@section('javascript_page')
 <script type="text/javascript">
      $(document).ready(function(){
       $('#formData').submit(function(){
-        if($('#role').val() == 5 && $('#leader_id').val() == ''){
-          alert('Chưa chọn chăm sóc CTV');
-          return false;
-        }
         $('#btnSave').hide();
         $('#btnLoading').show();
       });
-      @if(old('role', $detail->role) == 5)
-        $('#div_cs').show();
-      @else
-        $('#div_cs').hide();
-      @endif
+      @if(Auth::user()->role == 3)
       $('#role').change(function(){
-        if($(this).val() == 5){
-          $('#div_cs').show();
+        if($(this).val() == 1){
+          $('#chon_mod').show();
         }else{
-          $('#div_cs').hide();
+          $('#chon_mod').hide();
         }
-      });   
+      });
+      @endif
+      if($('#role').val() == 1){
+        $('#chon_mod').show();
+      }else{
+        $('#chon_mod').hide();
+      }
     });
 </script>
 @stop
