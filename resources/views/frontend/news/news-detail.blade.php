@@ -15,7 +15,7 @@
                    <div class="embed-responsive embed-responsive-16by9 video-embed-box">
                       <iframe src="https://www.youtube.com/embed/Ikkfwnq4Uss"  class="embed-responsive-item"></iframe>
                    </div>
-                   <h2 class="title main-head-title">Kiss me if I’m wrong but Dinosaurs still exist? Right?s</h2>
+                   <h2 class="title main-head-title">{!! $detail->title !!}</h2>
                    <div class="metabox">
                       <span class="meta-i">
                       <i class="fa fa-thumbs-up" aria-hidden="true"></i>20.895
@@ -30,7 +30,7 @@
                       <i class="fa fa-clock-o"></i>March 16. 2017
                       </span>
                       <span class="meta-i">
-                      <i class="fa fa-eye"></i>1,347,912 views
+                      <i class="fa fa-eye"></i>1,347,912 lươt xem
                       </span>
                       <div class="ratings">
                          <i class="fa fa-star" aria-hidden="true"></i>
@@ -64,14 +64,10 @@
                    </div>
                 </div>
                 <div class="clearfix spacer"></div>
-                <!-- DETAILS -->
+                <!-- DETAILS -->                
                 <div class="video-content">
-                   <h2 class="title main-head-title">Video Details</h2>
-                   <p>
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                   </p>
-                   <p>
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                   <h2 class="title main-head-title">Nội dung</h2>
+                   {!! $detail->content !!}
                    </p>
                 </div>
                 <div class="clearfix spacer"></div>
@@ -83,7 +79,7 @@
           
             <!-- COMMENTS -->
             <section id="comments">
-                <h2 class="title">leave comment</h2>
+                <h2 class="title">Bình luận</h2>
                 <div class="widget-area">
                     <div class="status-upload">
                         <form>
@@ -102,39 +98,7 @@
                 
                 
                 <div class="row comment-posts">
-                    <div class="col-sm-1">
-                        <div class="thumbnail">
-                            <img class="img-responsive user-photo" src="img/thumbs/thumb-review.jpg" alt="Comment User Avatar">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-11">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <strong>John Doe</strong> <span class="pull-right">commented 5 days ago</span>
-                            </div>
-                            <div class="panel-body">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="col-sm-1">
-                        <div class="thumbnail">
-                            <img class="img-responsive user-photo" src="img/thumbs/thumb-review.jpg" alt="Comment User Avatar">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-11">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <strong>John Doe</strong> <span class="pull-right">commented 5 days ago</span>
-                            </div>
-                            <div class="panel-body">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
 
             </section>
@@ -219,9 +183,6 @@
     </div>
 </div>
 @stop
-
-  
-
-  @section('javascript_page')
+@section('javascript_page')
   	
-@endsection
+@stop

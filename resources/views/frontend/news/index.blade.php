@@ -30,9 +30,9 @@
                          </div>
                          <div class="infor">
                             <h4>
-                               <a class="title" href="#">{!! $post->title !!}</a>
+                               <a class="title" href="{{ route('detail', [ $post->slug, $post->id ]) }}">{!! $post->title !!}</a>
                             </h4>
-                            <span class="posts-txt" title="Posts from l"><i class="fa fa-thumbs-up" aria-hidden="true"></i>20.895</span>
+                            <span class="posts-txt" title="{!! $post->title !!}"><i class="fa fa-thumbs-up" aria-hidden="true"></i>20.895</span>
                             <div class="ratings">
                                <i class="fa fa-star" aria-hidden="true"></i>
                                <i class="fa fa-star" aria-hidden="true"></i>
