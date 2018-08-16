@@ -21,8 +21,8 @@ class NewsController extends Controller
 
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
 
-        $articlesArr = Articles::where('cate_id', $cateDetail->id)->orderBy('id', 'desc')->paginate(36);
-
+        $articlesArr = Articles::where('cate_id', $cateDetail->id)->where('status', 1)->orderBy('id', 'desc')->paginate(36);
+        
         $hotArr = Articles::where( ['cate_id' => $cateDetail->id, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
         $seo['title'] = $cateDetail->meta_title ? $cateDetail->meta_title : $cateDetail->title;
         $seo['description'] = $cateDetail->meta_description ? $cateDetail->meta_description : $cateDetail->title;
