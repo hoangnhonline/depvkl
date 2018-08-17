@@ -4,18 +4,18 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Banner của <span style="color:red">{{ $detail->name }}</span>
+      Banner : <span style="color:red">{{ $detail->name }}</span>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type]) }}">banner</a></li>
-      <li class="active"><span class="glyphicon glyphicon-pencil"></span></li>
+      <li><a href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type]) }}">Banner</a></li>
+      <li class="active">Update</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default btn-sm " href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type]) }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default btn-sm " href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type]) }}" style="margin-bottom:5px">Back</a>
     <form role="form" method="POST" action="{{ route('banner.update') }}">
     <div class="row">
       <!-- left column -->
@@ -24,7 +24,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            Chỉnh sửa
+            Update
           </div>
           <!-- /.box-header -->               
             {!! csrf_field() !!}
@@ -43,40 +43,38 @@
                   <label class="col-md-3 row">Banner </label>  
                   <input type="hidden" name="id" value="{{ $detailBanner->id }}">  
                   <div class="col-md-9">
-                    <img id="thumbnail_image" src="{{ $detailBanner->image_url ? Helper::showImage($detailBanner->image_url) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
-                    
-                    <input type="file" id="file-image" style="display:none" />
+                      <img id="thumbnail_image_url" src="{{ $detailBanner->image_url ? Helper::showImage($detailBanner->image_url) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="600">
                  
-                    <button class="btn btn-default btn-sm" id="btnUploadImage" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnSingleUpload" data-set="image_url" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>  
                 <div class="form-group">
-                  <label>Ẩn / Hiện</label>
+                  <label>Hide / show</label>
                   <select name="status" class="form-control" id="status">
-                  	<option value="1" {{ $detailBanner->status == 1  ? "selected" : "" }}>Hiện</option>
-                  	<option value="2" {{ $detailBanner->status == 2  ? "selected" : "" }}>Ẩn</option>
+                  	<option value="1" {{ $detailBanner->status == 1  ? "selected" : "" }}>Show</option>
+                  	<option value="2" {{ $detailBanner->status == 2  ? "selected" : "" }}>Hide</option>
                   </select>
                 </div>           
                 <!-- textarea -->
                 <div class="form-group">
-                  <label>Loại banner</label>
+                  <label>Type</label>
                   <select name="type" class="form-control" id="type">
-                  	<option value="1" {{ $detailBanner->type == 1  ? "selected" : "" }}>Không liên kết</option>
-                  	<option value="2" {{ $detailBanner->type == 2 ? "selected" : "" }}>Có liên kết</option>
+                  	<option value="1" {{ $detailBanner->type == 1  ? "selected" : "" }}>No link</option>
+                  	<option value="2" {{ $detailBanner->type == 2 ? "selected" : "" }}>Link</option>
                   </select>
                 </div>  
                 <div class="form-group" id="div_lk" style="display:none">
-                  <label>Liên kết</label>
+                  <label>Link</label>
                   <input type="text" name="ads_url" id="ads_url" value="{{ $detailBanner->ads_url }}" class="form-control">
                 </div>  
-               
+                <input type="hidden" name="image_url" id="image_url" value="{{ $detailBanner->image_url }}"/>
                 <input type="hidden" name="object_id" value="{{ $object_id }}">
                 <input type="hidden" name="object_type" value="{{ $object_type }}">
             </div>                        
             <div class="box-footer">
-              <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
-              <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type])}}">Hủy</a>
+              <button type="submit" class="btn btn-primary btn-sm">Save</button>
+              <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('banner.index', ['object_id' => $object_id, 'object_type' => $object_type])}}">Cancel</a>
             </div>
             
         </div>
