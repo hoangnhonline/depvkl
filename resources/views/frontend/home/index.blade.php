@@ -21,7 +21,7 @@
               <!-- POST L size -->
               <div class="post post-medium">
                  <div class="thumbr">
-                    <a class="afterglow post-thumb" href="https://www.youtube.com/watch?v=Ikkfwnq4Uss" data-lity>
+                    <a class="afterglow post-thumb" href="{{ route('detail', [ $post->slug, $post->id ]) }}">
                        <span class="play-btn-border" title="Play"><i class="fa fa-play-circle headline-round" aria-hidden="true"></i></span>
                        <div class="cactus-note ct-time font-size-1"><span>{{ $post->duration }}</span></div>
                        <img class="img-responsive" src="{!! $post->image_urlxxx !!}" alt="{!! $post->title !!}">

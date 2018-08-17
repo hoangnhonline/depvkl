@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ArticlesCate;
 use App\Models\Articles;
+use App\Helpers\simple_html_dom;
 use Helper, File, Session, Auth;
 use Mail;
 
@@ -35,24 +36,53 @@ class NewsController extends Controller
     { 
         $id = $request->id;
 
-        $detail = Articles::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'image_url', 'content', 'meta_id', 'created_at', 'cate_id')
-                ->first();
+        $detail = Articles::find($id);
+        $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1" );
+        curl_setopt( $ch, CURLOPT_URL, $detail->video_url );
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        //if(strpos($origin_url, 'xvideos') > 0 || strpos($origin_url, 'xnxx.com') > 0){
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3B48b Safari/419.3');    
+        //}      
+        $result = curl_exec($ch);            
         
+        curl_close($ch);
+        $htmlGet = new simple_html_dom();                
+        $htmlGet->load($result);  
+        //if(strpos($origin_url, 'xvideos') > 0){ 
+          
+        $tmp1 = explode("setVideoUrlHigh('", $result);
+        
+        if(isset($tmp1[1])){
+            $tmp2 = explode("');", $tmp1[1]);         
+        }else{                        
+            $tmp1 = explode("setVideoUrlLow('", $result);
+            if(isset($tmp1[1])){                                
+                $tmp2 = explode("');", $tmp1[1]);         
+            }else{
+                echo "Your link does not support, please try another link.";die;
+            }
+        }  
+        $video_url = $tmp2[0];
+        $tmpThumb = explode("setThumbUrl('", $result);
+        if(isset($tmpThumb[1])){
+            $tmpThum2 = explode("');", $tmpThumb[1]);         
+            $poster_url = $tmpThum2[0];
+        }        
+        //}
         if( $detail ){           
 
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
 
-            $hotArr = Articles::where( ['cate_id' => $detail->cate_id, 'is_hot' => 1] )->where('id', '<>', $id)->orderBy('id', 'desc')->limit(5)->get();
-            $otherArr = Articles::where( ['cate_id' => $detail->cate_id] )->where('id', '<>', $id)->orderBy('id', 'desc')->limit(4)->get();
+            $hotArr = Articles::where( ['cate_id' => $detail->cate_id, 'is_hot' => 1] )->where('id', '<>', $id)->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
+            $otherArr = Articles::where( ['cate_id' => $detail->cate_id] )->where('id', '<>', $id)->where('status', 1)->orderBy('id', 'desc')->limit(4)->get();
             $seo['title'] = $detail->meta_title ? $detail->meta_title : $detail->title;
             $seo['description'] = $detail->meta_description ? $detail->meta_description : $detail->title;
             $seo['keywords'] = $detail->meta_keywords ? $detail->meta_keywords : $detail->title;
             $socialImage = $detail->image_url; 
-          
-            $tagSelected = Articles::getListTag($id);
-            $cateDetail = ArticlesCate::find($detail->cate_id);
-            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail'));
+            $cateDetail = ArticlesCate::find($detail->cate_id);            
+            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'cateDetail', 'video_url', 'poster_url'));
         }else{
             return view('erros.404');
         }
