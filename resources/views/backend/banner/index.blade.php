@@ -20,11 +20,11 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      @if($arrSearch['object_id'] == 1 || $arrSearch['object_id'] == 5)
+     
       <a href="{{ route('banner.create', ['object_id' => $arrSearch['object_id'], 'object_type' => $arrSearch['object_type']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px;" 
 
       >Add banner</a>
-      @endif
+   
       @if($arrSearch['object_type'] == 3)
       <a class="btn btn-default btn-sm" href="{{ route('banner.list')}}" style="margin-bottom:5px;">Back</a>
       @endif

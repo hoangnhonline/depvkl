@@ -122,7 +122,7 @@ class BannerController extends Controller
         $dataArr['created_user'] = Auth::user()->id;
         $dataArr['updated_user'] = Auth::user()->id;
         Banner::create($dataArr);
-        Session::flash('message', 'Tạo mới thành công');
+        Session::flash('message', 'Success.');
         return redirect()->route('banner.index', ['object_id' => $dataArr['object_id'], 'object_type' => $dataArr['object_type']]);
     }
 
@@ -186,7 +186,7 @@ class BannerController extends Controller
         
         $model = Banner::find($dataArr['id']);
         $model->update($dataArr);
-        Session::flash('message', 'Cập nhật thành công');
+        Session::flash('message', 'Success.');
         return redirect()->route('banner.index', ['object_id' => $dataArr['object_id'], 'object_type' => $dataArr['object_type']]);
     }
     /**
@@ -201,7 +201,7 @@ class BannerController extends Controller
         $model = Banner::find($id);
         $model->delete();
         // redirect
-        Session::flash('message', 'Xóa thành công');
+        Session::flash('message', 'Success.');
         return redirect()->route('banner.index', ['object_type' => $model->object_type, 'object_id' => $model->object_id]);
     }
 }
