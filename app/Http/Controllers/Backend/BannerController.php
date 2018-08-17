@@ -37,20 +37,16 @@ class BannerController extends Controller
         
         if( $object_type == 3){
             if( $object_id == 1){
-                $detail->name = "Hình ảnh - trang chủ";
+                $detail->name = "Home page - header";
             }elseif( $object_id == 2){
-                $detail->name = "Banner giữa trang";
+                $detail->name = "Home page - Under main menu";
             }elseif( $object_id == 3){
-                $detail->name = "Banner tuyển dụng";
+                $detail->name = "Footer";
             }elseif( $object_id == 4){
-                $detail->name = "Banner top ( cạnh logo )";
+                $detail->name = "Category page";
             }elseif($object_id == 5){
-                $detail->name = "Slider - trang chủ";
-            } elseif($object_id == 6){
-                $detail->name = "Dự án đang bán";
-            } elseif($object_id == 7){
-                $detail->name = "Dự án đã bán";
-            }   
+                $detail->name = "Detail page";
+            }
         }
         if($object_type == 4){
             $detail = LandingProjects::find($object_id);
@@ -85,20 +81,16 @@ class BannerController extends Controller
         }
          if( $object_type == 3){
             if( $object_id == 1){
-                $detail->name = "Hình ảnh - trang chủ";
+                $detail->name = "Home page - header";
             }elseif( $object_id == 2){
-                $detail->name = "Banner giữa trang";
+                $detail->name = "Home page - Under main menu";
             }elseif( $object_id == 3){
-                $detail->name = "Banner tuyển dụng";
+                $detail->name = "Footer";
             }elseif( $object_id == 4){
-                $detail->name = "Banner top ( cạnh logo )";
+                $detail->name = "Category page";
             }elseif($object_id == 5){
-                $detail->name = "Slider - trang chủ";
-            } elseif($object_id == 6){
-                $detail->name = "Dự án đang bán";
-            } elseif($object_id == 7){
-                $detail->name = "Dự án đã bán";
-            }        
+                $detail->name = "Detail page";
+            }      
         }
         if($object_type == 4){
             $detail = LandingProjects::find($object_id);

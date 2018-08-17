@@ -68,7 +68,7 @@ class ArticlesController extends Controller
         set_time_limit(10000);
         $articleCate = ArticlesCate::orderBy('display_order', 'desc')->get();
         foreach($articleCate as $cate){             
-            $list = Articles::where('cate_id', $cate->id)->limit(100)->get();
+            $list = Articles::where('cate_id', $cate->id)->offset(200)->limit(100)->get();
             foreach($list as $a){
                 $code = $this->check($a->image_url);
                 var_dump($code, $a->image_url);

@@ -2,6 +2,12 @@
 @include('frontend.partials.meta')
 @section('content')
 <div class="row">
+    <div class="container text-center">
+      <!-- BOTTOM ADVERTISE BOX -->
+      <a href="http://themeforest.net/user/orcasthemes/portfolio?ref=orcasthemes" class="banner-xl">
+      <img src="{{ URL::asset('public/assets/img/banners/banner-xl.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
+      </a>     
+   </div>
     <!-- POST ARTICLES -->  
     <div class="col-lg-12 col-md-12">
        <!-- BREADCRUMB -->
@@ -25,7 +31,7 @@
                             <a class="afterglow post-thumb" href="{{ route('detail', [ $post->slug, $post->id ]) }}">
                                <span class="play-btn-border" title="Play"><i class="fa fa-play-circle headline-round" aria-hidden="true"></i></span>
                                <div class="cactus-note ct-time font-size-1"><span>{{ $post->duration }}</span></div>
-                               <img class="img-responsive" src="{!! $post->image_url !!}" alt="{!! $post->title !!}">
+                               <img class="img-responsive" src="{!! $post->image_urlxxx !!}" alt="{!! $post->title !!}">
                             </a>
                          </div>
                          <div class="infor">

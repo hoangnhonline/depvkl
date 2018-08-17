@@ -4,6 +4,7 @@ var left = (screen.width/2)-((w-300)/2);
 var top = (screen.height/2)-((h-100)/2);
 
 function singleUpload(obj) {
+  alert('123');
     window.KCFinder = {};
     window.KCFinder.callBack = function(url) {
       console.log($('#app_url').val());

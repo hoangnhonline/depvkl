@@ -4,12 +4,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Banner của <span style="color:red">{{ $detail->name }}</span>
+    Banner : <span style="color:red">{{ $detail->name }}</span>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
     <li><a href="{{ route( 'banner.index', ['object_id' => $arrSearch['object_id'], 'object_type' => $arrSearch['object_type']]) }}">Banner</a></li>
-    <li class="active">Danh sách</li>
+    <li class="active">List</li>
   </ol>
 </section>
 
@@ -23,15 +23,15 @@
       @if($arrSearch['object_id'] == 1 || $arrSearch['object_id'] == 5)
       <a href="{{ route('banner.create', ['object_id' => $arrSearch['object_id'], 'object_type' => $arrSearch['object_type']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px;" 
 
-      >Tạo mới</a>
+      >Add banner</a>
       @endif
       @if($arrSearch['object_type'] == 3)
-      <a class="btn btn-default btn-sm" href="{{ route('banner.list')}}" style="margin-bottom:5px;">Quay lại</a>
+      <a class="btn btn-default btn-sm" href="{{ route('banner.list')}}" style="margin-bottom:5px;">Back</a>
       @endif
       <div class="box">
 
         <div class="box-header with-border">
-          <h3 class="box-title">Danh sách</h3>
+          <h3 class="box-title">List</h3>
         </div>
         
         <!-- /.box-header -->
@@ -39,11 +39,11 @@
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">#</th>
-              <th style="width: 1%;white-space:nowrap">Thứ tự</th>
+              <th style="width: 1%;white-space:nowrap">Order</th>
               <th style="width:400px">Banner</th>
-              <th>Liên kết</th>
+              <th>Link</th>
   
-              <th width="1%;white-space:nowrap">Thao tác</th>
+              <th width="1%;white-space:nowrap">Action</th>
             </tr>
             <tbody>
             @if( $items->count() > 0 )
@@ -69,7 +69,7 @@
               @endforeach
             @else
             <tr>
-              <td colspan="5">Không có dữ liệu.</td>
+              <td colspan="5">No data.</td>
             </tr>
             @endif
 
@@ -89,8 +89,8 @@
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({
-    title: 'Bạn muốn xóa "' + name +'"?',
-    text: "Dữ liệu sẽ không thể phục hồi.",
+    title: 'Are you sure delete "' + name +'"?',
+    text: "Can't recover data.",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',

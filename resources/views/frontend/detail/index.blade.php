@@ -56,7 +56,7 @@
 					<div id="slide-detail">
 						<ul class="slide-detail">
 							@foreach( $hinhArr as $hinh )
-							<li><img src="{{ Helper::showImage($hinh['image_url']) }}" alt="hinh anh nho" /></li>
+							<li><img src="{{ Helper::showImage($hinh['image_urlxxx']) }}" alt="hinh anh nho" /></li>
                             @endforeach
 						</ul>
 					
@@ -137,7 +137,7 @@
 							</div>
 							<div class="news-with-region-content">
 								<div class="news-with-region-img">
-									<a  href="{{ route('chi-tiet', [$product->slug_loai, $product->slug, $product->id]) }}"><img  title="{!! $product->title !!}" src="{{ $product->image_urls ? Helper::showImageThumb($product->image_urls) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{!! $product->title !!}" ></a>
+									<a  href="{{ route('chi-tiet', [$product->slug_loai, $product->slug, $product->id]) }}"><img  title="{!! $product->title !!}" src="{{ $product->image_urlxxxs ? Helper::showImageThumb($product->image_urlxxxs) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{!! $product->title !!}" ></a>
 								</div>
 								<div class="news-with-region-info">
 									<p>

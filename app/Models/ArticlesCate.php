@@ -28,7 +28,7 @@ class ArticlesCate extends Model  {
 
     public function articles()
     {
-        return $this->hasMany('App\Models\Articles', 'cate_id');
+        return $this->hasMany('App\Models\Articles', 'cate_id')->where('status', '=', '1');;
     }
     public static function getList($params = []){
         $query = self::where('status', 1);

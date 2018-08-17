@@ -15,7 +15,7 @@
                    <div class="embed-responsive embed-responsive-16by9 video-embed-box">
                       <div id="videos">
                         <div class="hero-unit" style="position:relative"> 
-                          <video id='videoPlayer' style="position:relative" preload='metadata' controls poster="{{ $poster_url }}" style="border: 1px solid; background: black;">
+                          <video id='videoPlayer' style="position:relative" preload='metadata' controls poster="{{ $poster_urlxxx }}" style="border: 1px solid; background: black;">
                                     <source id="mp4Source" src="{{ $video_url }}" type="video/mp4">               
                                 </video>        
                             </div>
@@ -33,10 +33,10 @@
                       <i class="fa fa-user"></i><a href="#" class="author" title="John Doe">John Doe</a>
                       </span>
                       <span class="meta-i">
-                      <i class="fa fa-clock-o"></i>March 16. 2017
+                      <i class="fa fa-clock-o"></i>{{ date('Y/m/d', strtotime($detail->updated_at)) }}
                       </span>
                       <span class="meta-i">
-                      <i class="fa fa-eye"></i>1,347,912 lươt xem
+                      <i class="fa fa-eye"></i>1,347,912 lượt xem
                       </span>
                       <div class="ratings">
                          <i class="fa fa-star" aria-hidden="true"></i>
@@ -53,7 +53,7 @@
                       <li class="social-youtube"><a href="#" class="fa fa-youtube social-icons"></a></li>
                       <li class="social-rss"><a href="#" class="fa fa-rss social-icons"></a></li>
                    </ul>
-                   <ul class="footer-tags">
+                   <!-- <ul class="footer-tags">
                       <li><a href="#">videos</a></li>
                       <li><a href="#">premium</a></li>
                       <li><a href="#">hair</a></li>
@@ -63,9 +63,9 @@
                       <li><a href="#">sport</a></li>
                       <li><a href="#">money</a></li>
                       <li><a href="#">comments</a></li>
-                   </ul>
+                   </ul> -->
                    <div class="share-input">
-                      <input type="text" value="https://www.youtube.com/watch?v=Ikkfwnq4Uss" name="share-input">
+                      <input type="text" value="{{ url()->current() }}">
                       <span class="fa fa-chain sharelinkicon"></span>
                    </div>
                 </div>
@@ -78,13 +78,13 @@
                 </div>
                 <div class="clearfix spacer"></div>
                 <!-- MAIN ROLL ADVERTISE BOX -->
-                <a href="http://themeforest.net/user/orcasthemes/portfolio?ref=orcasthemes" class="banner-md">
-                <img src="img/banners/banner-xl.jpg" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
+                <a href="" class="banner-md">
+                <img src="{{ URL::asset('public/assets/img/banners/banner-xl.jpg' ) }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
                 </a>
              </article>
           
             <!-- COMMENTS -->
-            <section id="comments">
+            <!-- <section id="comments">
                 <h2 class="title">Bình luận</h2>
                 <div class="widget-area">
                     <div class="status-upload">
@@ -99,25 +99,25 @@
                                 <button type="submit" class="btn pull-right"><i class="fa fa-share"></i> post comment</button>
                             </div>
                         </form>
-                    </div><!-- Status Upload  -->
-                </div><!-- Widget Area -->
+                    </div>
+                </div>
                 
                 
                 <div class="row comment-posts">
                    
                 </div>
 
-            </section>
+            </section> -->
           
           </div>
           <!-- VIDEO SIDE BANNERS -->
           <div class="col-lg-4 hidden-md hidden-sm">
              <!-- MAIN ROLL ADVERTISE BOX -->
-             <a href="http://themeforest.net/user/orcasthemes/portfolio?ref=orcasthemes" class="video-right-banner">
-             <img src="img/banners/banner-400x400.jpg" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
+             <a href="" class="video-right-banner">
+             <img src="{{ URL::asset('public/assets/img/banners/banner-400x400.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
              </a>
-             <a href="http://themeforest.net/user/orcasthemes/portfolio?ref=orcasthemes" class="video-right-banner">
-             <img src="img/banners/banner-400x400.jpg" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
+             <a href="" class="video-right-banner">
+             <img src="{{ URL::asset('public/assets/img/banners/banner-400x400.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
              </a>
           </div>
        </div>
@@ -135,7 +135,7 @@
                          <a class="post-thumb" href="{{ route('detail', [ $post->slug, $post->id ]) }}">
                             <span class="play-btn-border" title="Play"><i class="fa fa-play-circle headline-round" aria-hidden="true"></i></span>
                             <div class="cactus-note ct-time font-size-1"><span>{{ $post->duration }}</span></div>
-                            <img class="img-responsive" src="{{ $post->image_url }}" alt="{!! $post->title !!}">
+                            <img class="img-responsive" src="{{ $post->image_urlxxx }}" alt="{!! $post->title !!}">
                          </a>
                       </div>
                       <div class="infor">
