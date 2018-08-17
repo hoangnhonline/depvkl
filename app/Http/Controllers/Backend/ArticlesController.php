@@ -66,15 +66,28 @@ class ArticlesController extends Controller
     public function create(Request $request)
     {
         set_time_limit(10000);
-        $arr = Articles::offset(0)->limit(10000)->get();
-        foreach($arr as $a){
-            $code = $this->check($a->image_url);
-            var_dump($code, $a->image_url);
-            echo "<br>";
-            if($code != 200){
-                $a->delete();
+        $articleCate = ArticlesCate::orderBy('display_order', 'desc')->get();
+        foreach($articleCate as $cate){             
+            $list = Articles::where('cate_id', $cate->id)->limit(100)->get();
+            foreach($list as $a){
+                $code = $this->check($a->image_url);
+                var_dump($code, $a->image_url);
+                echo "<br>";
+                if($code != 200){
+                    $a->delete();
+                }
             }
         }
+        die;
+        // $arr = Articles::offset(0)->limit(2000)->get();
+        // foreach($arr as $a){
+        //     $code = $this->check($a->image_url);
+        //     var_dump($code, $a->image_url);
+        //     echo "<br>";
+        //     if($code != 200){
+        //         $a->delete();
+        //     }
+        // }
         $cateArr = ArticlesCate::where('status', 1)->get();
         
         $cate_id = $request->cate_id;       

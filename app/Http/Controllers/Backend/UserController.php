@@ -30,11 +30,9 @@ class UserController extends Controller
         ));*/       
         if ( Auth::check() )
         {
-            if(in_array(Auth::user()->role, [2,3,4,5])){
-                return redirect()->route('sales.index');    
-            }
-
-            return redirect()->route('dashboard.index');
+            
+            return redirect()->route('articles.index');    
+            
         }        
         return view('backend.login');
     }
