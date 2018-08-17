@@ -75,6 +75,14 @@
            $(this).find(".dropdown-toggle").dropdown("toggle");
          });
       </script>
+      <style type="text/css">
+      .hero-unit {
+          margin: 0 auto 0 auto;
+      }
+      .hero-unit video {
+          width: 100%;
+      }
+      </style>
       @yield('javascript_page')
 
    </body>
