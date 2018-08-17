@@ -71,11 +71,8 @@ class UserController extends Controller
                     Session::put('avatar', $customer->image_url);
                 }
                 
-                if(in_array(Auth::user()->role, [2,3,4,5])){
-                    return redirect()->route('sales.index');    
-                }
-
-                return redirect()->route('dashboard.index');
+                
+                    return redirect()->route('articles.index');    
               
             }
 
