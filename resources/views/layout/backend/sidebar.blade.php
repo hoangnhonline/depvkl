@@ -43,25 +43,6 @@
         </a>       
       </li>      
       @endif
-      @if(Auth::user()->role > 1)
-      <li class="treeview {{ in_array(\Request::route()->getName(), ['account.index', 'info-seo.index', 'settings.index', 'settings.noti', 'menu.index', 'video.index', 'video.edit', 'video.create']) || (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 2 ) ? 'active' : '' }}">
-        <a href="#">
-          <i class="fa  fa-gears"></i>
-          <span>Settings</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">          
-          <li {{ (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 2 )? "class=active" : "" }}>
-            <a href="{{ route('custom-link.index', ['block_id' => 2 ]) }}">
-              <i class="fa fa-circle-o"></i>
-              <span>Link Footer</span>         
-            </a>       
-          </li>         
-        </ul>
-      </li>
-      @endif
       <!--<li class="header">LABELS</li>
       <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
       <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
