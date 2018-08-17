@@ -81,9 +81,8 @@ class NewsController extends Controller
             $seo['description'] = $detail->meta_description ? $detail->meta_description : $detail->title;
             $seo['keywords'] = $detail->meta_keywords ? $detail->meta_keywords : $detail->title;
             $socialImage = $detail->image_url; 
-            $cateDetail = ArticlesCate::find($detail->cate_id);  
-            $poster_urlxxx  = '';         
-            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'cateDetail', 'video_url', 'poster_url', 'poster_urlxxx'));
+            $cateDetail = ArticlesCate::find($detail->cate_id);
+            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'cateDetail', 'video_url', 'poster_url'));
         }else{
             return view('erros.404');
         }

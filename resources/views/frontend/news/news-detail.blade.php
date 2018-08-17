@@ -154,7 +154,7 @@
                          <a class="post-thumb" href="{{ route('detail', [ $post->slug, $post->id ]) }}">
                             <span class="play-btn-border" title="Play"><i class="fa fa-play-circle headline-round" aria-hidden="true"></i></span>
                             <div class="cactus-note ct-time font-size-1"><span>{{ $post->duration }}</span></div>
-                            <img class="img-responsive" src="{{ $post->image_urlxxx }}" alt="{!! $post->title !!}">
+                            <img class="img-responsive" src="{{ $post->image_url }}" alt="{!! $post->title !!}">
                          </a>
                       </div>
                       <div class="infor">

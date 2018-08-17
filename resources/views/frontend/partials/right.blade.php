@@ -78,7 +78,7 @@
          <li style="border-bottom:1px solid #ECECEC;margin-bottom:10px;">
             <div class="div_img_tt">
                <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}"><img
-                  class="img_ttnb" src="{{ Helper::showImage($articles->image_urlxxx) }}"
+                  class="img_ttnb" src="{{ Helper::showImage($articles->image_url) }}"
                   width="90" height="90"
                   alt="{!! $articles->title !!}"></a>
                <div class="clear"></div>
