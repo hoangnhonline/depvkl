@@ -66,9 +66,7 @@
                 <div class="form-group" id="div_lk" style="display:none">
                   <label>Link</label>
                   <input type="text" name="ads_url" id="ads_url" value="{{ old('ads_url') }}" class="form-control">
-                </div>  
-                <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>          
-            	<input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
+                </div>                  
                 <input type="hidden" name="object_id" value="{{ $object_id }}">
                 <input type="hidden" name="object_type" value="{{ $object_type }}">
             </div>                        
