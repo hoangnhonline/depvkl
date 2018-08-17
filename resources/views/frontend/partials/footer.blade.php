@@ -1,10 +1,20 @@
 <!-- BOTTOM BANNER -->
+<?php 
+ $bannerArr = DB::table('banner')->where(['object_id' => 3, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
+ ?>
 <div id="bottom-banner" class="container text-center">
-   <!-- BOTTOM ADVERTISE BOX -->
-   <a href="" class="banner-xl">
-   <img src="{{ URL::asset('public/assets/img/banners/banner-xl.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
-   </a>   
-</div>
+    @if($bannerArr)
+    @foreach($bannerArr as $banner)               
+     @if($banner->ads_url !='')
+     <a href="{{ $banner->ads_url }}" class="banner-xl">
+     @endif
+    <img src="{{ Helper::showImage($banner->image_url) }}" class="img-responsive" alt="footer banner">
+    @if($banner->ads_url !='')
+     </a>
+     @endif
+     @endforeach
+    @endif
+ </div>
 <!-- FOOTER -->
 <div id="footer" class="container-fluid footer-background">
    <div class="container">

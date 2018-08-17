@@ -78,9 +78,22 @@
                 </div>
                 <div class="clearfix spacer"></div>
                 <!-- MAIN ROLL ADVERTISE BOX -->
-                <a href="" class="banner-md">
-                <img src="{{ URL::asset('public/assets/img/banners/banner-xl.jpg' ) }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
-                </a>
+                <?php 
+                 $bannerArr = DB::table('banner')->where(['object_id' => 6, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
+                 ?>
+                
+                  @if($bannerArr)
+                  @foreach($bannerArr as $banner)               
+                   @if($banner->ads_url !='')
+                   <a href="{{ $banner->ads_url }}" class="banner-md">
+                   @endif
+                  <img src="{{ Helper::showImage($banner->image_url) }}" class="img-responsive" alt="detail page under content banner">
+                  @if($banner->ads_url !='')
+                   </a>
+                   @endif
+                   @endforeach
+                  @endif                 
+               
              </article>
           
             <!-- COMMENTS -->
@@ -109,17 +122,23 @@
 
             </section> -->
           
-          </div>
-          <!-- VIDEO SIDE BANNERS -->
+          </div>          
+           <?php 
+           $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
+           ?>
           <div class="col-lg-4 hidden-md hidden-sm">
-             <!-- MAIN ROLL ADVERTISE BOX -->
-             <a href="" class="video-right-banner">
-             <img src="{{ URL::asset('public/assets/img/banners/banner-400x400.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
-             </a>
-             <a href="" class="video-right-banner">
-             <img src="{{ URL::asset('public/assets/img/banners/banner-400x400.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
-             </a>
-          </div>
+              @if($bannerArr)
+              @foreach($bannerArr as $banner)               
+               @if($banner->ads_url !='')
+               <a href="{{ $banner->ads_url }}" class="video-right-banner">
+               @endif
+              <img src="{{ Helper::showImage($banner->image_url) }}" class="img-responsive" alt="detail page sidebar banner">
+              @if($banner->ads_url !='')
+               </a>
+               @endif
+               @endforeach
+              @endif
+           </div>
        </div>
        <div class="clearfix spacer"></div>
        <div class="row">

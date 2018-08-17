@@ -1,12 +1,22 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
 @section('content')
-<div class="row">
-    <div class="container text-center">
-      <!-- BOTTOM ADVERTISE BOX -->
-      <a href="http://themeforest.net/user/orcasthemes/portfolio?ref=orcasthemes" class="banner-xl">
-      <img src="{{ URL::asset('public/assets/img/banners/banner-xl.jpg') }}" class="img-responsive" alt="Buy Now Muvee Reviews Bootstrap HTML5 Template" title="Buy Now Muvee Reviews Bootstrap HTML5 Template">
-      </a>     
+<div class="row">    
+   <?php 
+   $bannerArr = DB::table('banner')->where(['object_id' => 4, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
+   ?>
+  <div class="container text-center">
+      @if($bannerArr)
+      @foreach($bannerArr as $banner)               
+       @if($banner->ads_url !='')
+       <a href="{{ $banner->ads_url }}" class="banner-xl">
+       @endif
+      <img src="{{ Helper::showImage($banner->image_url) }}" class="img-responsive" alt="category banner">
+      @if($banner->ads_url !='')
+       </a>
+       @endif
+       @endforeach
+      @endif
    </div>
     <!-- POST ARTICLES -->  
     <div class="col-lg-12 col-md-12">

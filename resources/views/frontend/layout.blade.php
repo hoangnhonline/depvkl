@@ -50,8 +50,21 @@
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8">
                <a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logo.png') }}" class="main-logo img-responsive" alt="Muvee Reviews" title="Muvee Reviews"></a>
             </div>
+            <?php 
+            $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
+            ?>
             <div class="col-lg-8 hidden-md text-center hidden-sm hidden-xs">
-               <img src="{{ URL::asset('public/assets/img/banners/banner-sm.jpg') }}" class="img-responsive" alt="Muvee Reviews Video Magazine HTML5 Bootstrap">
+               @if($bannerArr)
+               @foreach($bannerArr as $banner)               
+                @if($banner->ads_url !='')
+                <a href="{{ $banner->ads_url }}">
+                @endif
+               <img src="{{ Helper::showImage($banner->image_url) }}" class="img-responsive" alt="header banner">
+               @if($banner->ads_url !='')
+                </a>
+                @endif
+                @endforeach
+               @endif
             </div>
             
          </div>
