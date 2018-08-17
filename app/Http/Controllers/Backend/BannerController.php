@@ -45,8 +45,10 @@ class BannerController extends Controller
             }elseif( $object_id == 4){
                 $detail->name = "Category page";
             }elseif($object_id == 5){
-                $detail->name = "Detail page";
-            }
+                $detail->name = "Detail page - sidebar";
+            }elseif($object_id == 6){
+                $detail->name = "Detail page - under content";
+            } 
         }
         if($object_type == 4){
             $detail = LandingProjects::find($object_id);
@@ -89,7 +91,9 @@ class BannerController extends Controller
             }elseif( $object_id == 4){
                 $detail->name = "Category page";
             }elseif($object_id == 5){
-                $detail->name = "Detail page";
+                $detail->name = "Detail page - sidebar";
+            }elseif($object_id == 6){
+                $detail->name = "Detail page - under content";
             }      
         }
         if($object_type == 4){

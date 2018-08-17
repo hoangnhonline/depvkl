@@ -66,12 +66,18 @@
               </tr> 
               <tr>
                 <td><span class="order">5</span></td>                                                                           
-                <td><a href="{{ route( 'banner.index', [ 'object_id' => 5, 'object_type' => 3 ]) }}" class="link_edit">Detail page</a></td>
+                <td><a href="{{ route( 'banner.index', [ 'object_id' => 5, 'object_type' => 3 ]) }}" class="link_edit">Detail page - sidebar</a></td>
                 <td style="white-space:nowrap; text-align:right">                 
                   <a href="{{ route( 'banner.index', [ 'object_id' => 5, 'object_type' => 3 ]) }}" class="btn-sm btn btn-primary">Banner</a>
                 </td>
               </tr>           
-
+              <tr>
+                <td><span class="order">6</span></td>                                                                           
+                <td><a href="{{ route( 'banner.index', [ 'object_id' => 6, 'object_type' => 3 ]) }}" class="link_edit">Detail page - under content</a></td>
+                <td style="white-space:nowrap; text-align:right">                 
+                  <a href="{{ route( 'banner.index', [ 'object_id' => 6, 'object_type' => 3 ]) }}" class="btn-sm btn btn-primary">Banner</a>
+                </td>
+              </tr> 
           </tbody>
           </table>
         </div>        
