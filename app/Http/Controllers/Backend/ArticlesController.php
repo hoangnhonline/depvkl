@@ -65,29 +65,29 @@ class ArticlesController extends Controller
     */
     public function create(Request $request)
     {
-        set_time_limit(10000);
-        $articleCate = ArticlesCate::orderBy('display_order', 'desc')->get();
-        foreach($articleCate as $cate){             
-            $list = Articles::where('cate_id', $cate->id)->offset(200)->limit(100)->get();
-            foreach($list as $a){
-                $code = $this->check($a->image_url);
-                var_dump($code, $a->image_url);
-                echo "<br>";
-                if($code != 200){
-                    $a->delete();
-                }
-            }
-        }
-        die;
-        // $arr = Articles::offset(0)->limit(2000)->get();
-        // foreach($arr as $a){
-        //     $code = $this->check($a->image_url);
-        //     var_dump($code, $a->image_url);
-        //     echo "<br>";
-        //     if($code != 200){
-        //         $a->delete();
+        // set_time_limit(10000);
+        // $articleCate = ArticlesCate::orderBy('display_order', 'desc')->get();
+        // foreach($articleCate as $cate){             
+        //     $list = Articles::where('cate_id', $cate->id)->offset(200)->limit(100)->get();
+        //     foreach($list as $a){
+        //         $code = $this->check($a->image_url);
+        //         var_dump($code, $a->image_url);
+        //         echo "<br>";
+        //         if($code != 200){
+        //             $a->delete();
+        //         }
         //     }
         // }
+        // die;
+        // // $arr = Articles::offset(0)->limit(2000)->get();
+        // // foreach($arr as $a){
+        // //     $code = $this->check($a->image_url);
+        // //     var_dump($code, $a->image_url);
+        // //     echo "<br>";
+        // //     if($code != 200){
+        // //         $a->delete();
+        // //     }
+        // // }
         $cateArr = ArticlesCate::where('status', 1)->get();
         
         $cate_id = $request->cate_id;       
@@ -124,7 +124,9 @@ class ArticlesController extends Controller
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['type'] = 1;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
-
+        $dataArr['is_gg'] = 1;
+        $dataArr['status'] = 1;
+        $dataArr['encode_link'] = Helper::encodeLink($dataArr['video_url']);
         $rs = Articles::create($dataArr);
 
         $object_id = $rs->id;

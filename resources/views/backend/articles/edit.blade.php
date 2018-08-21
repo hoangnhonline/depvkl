@@ -64,16 +64,21 @@
                 <div class="form-group">                  
                   <label>Slug <span class="red-star">*</span></label>                  
                   <input type="text" class="form-control" name="slug" id="slug" value="{{ $detail->slug }}">
-                </div>
-                <div class="form-group" >
-                  
-                  <label>Thumbnail URL <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="image_url" id="image_url" value="{{ old('image_url', $detail->image_url) }}">
-                </div>
+                </div>              
+                <input type="hidden" name="image_url" id="image_url" value="{{ $detail->image_url }}"/>  
+                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                  <label class="col-md-3 row">Thumbnail </label>                    
+                  <div class="col-md-9">
+                      <img id="thumbnail_image_url" src="{{ $detail->image_url ? Helper::showImage($detail->image_url) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="300">
+                 
+                    <button class="btn btn-default btn-sm btnSingleUpload" data-set="image_url" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                  <div style="clear:both"></div>
+                </div> 
                 <span class=""></span>
                 <div class="form-group">                  
-                  <label>Video URL <span class="red-star">*</span></label>                  
-                  <input type="text" class="form-control" name="video_url" id="video_url" value="{{ old('video_url', $detail->video_url) }}">
+                  <label>Video URL (Google)<span class="red-star">*</span></label>   
+                  <textarea class="form-control" rows="4" name="video_url" id="video_url">{{ old('video_url', $detail->video_url) }}</textarea>
                 </div>
                 <div style="clear:both"></div>                                 
                 <div class="form-group">

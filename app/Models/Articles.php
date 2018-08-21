@@ -40,7 +40,9 @@ class Articles extends Model  {
                             'created_user', 
                             'updated_user',
                             'duration',
-                            'video_id'];
+                            'video_id',
+                            'is_gg',
+                            'encode_link'];
     public static function getList($params = []){
         $query = self::where('status', 1);
         if( isset($params['cate_id']) && $params['cate_id'] ){
