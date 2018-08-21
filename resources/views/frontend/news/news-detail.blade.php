@@ -12,10 +12,10 @@
                 <!-- VIDEO INFO -->
                 <div class="video-info">
                    <!-- 16:9 aspect ratio -->
-                   <div class="embed-responsive embed-responsive-16by9 video-embed-box">
+                   <div class="">
                       <div id="videos">
                         <div class="hero-unit" style="position:relative"> 
-                          <video id='videoPlayer' style="position:relative" preload='metadata' controls poster="{{ $poster_urlxxx }}" style="border: 1px solid; background: black;">
+                          <video id='videoPlayer' style="position:relative" preload='metadata' controls poster="{{ $poster_url }}" style="border: 1px solid; background: black;">
                                     <source id="mp4Source" src="{{ $video_url }}" type="video/mp4">               
                                 </video>        
                             </div>

@@ -106,7 +106,7 @@ h2.icon {
     -o-transform: skew(-15deg);
     -ms-transform: skew(-15deg);
 	text-transform:uppercase;
-	font-size:30px;
+	font-size:20px;
 	letter-spacing: -0.6px;
 	margin:0px 0px 15px 0;
 }
@@ -1307,7 +1307,7 @@ margin-left: -15px;}
 
 .navbar-default .navbar-nav>li>a {
   color:#fff !important;
-  font-size:20px;
+  font-size:15px;
   letter-spacing:-0.5px;
   font-weight: 600;
   text-transform: uppercase;
@@ -1819,7 +1819,7 @@ span.join-date {
 	.carousel-control i {font-size:36px;}
 	
 	.subscribe-box {display:block;}
-	h2.icon {font-size:36px;}
+	h2.icon {font-size:20px;}
 	.cactus-note.ct-time {font-size:16px;}
 	.infor h4 {font-size:24px; line-height:30px;}
 	.posts-txt {font-size:18px;}
@@ -1837,7 +1837,7 @@ span.join-date {
 	
 	
 	.subscribe-box {display:block;}
-	h2.icon {font-size:36px;}
+	h2.icon {font-size:20px;}
 	.cactus-note.ct-time {font-size:16px;}
 	.infor h4 {font-size:24px; line-height:30px;}
 	.posts-txt {font-size:18px;}
@@ -1857,6 +1857,9 @@ span.join-date {
 	.map-frame {margin-bottom:30px;}
 	
 	.review-xs-thumbs .post {margin-bottom:20px;}
+	#bottom-banner{
+		padding : 5px !important;
+	}
 }
 
 /* Small Devices, Tablets */
@@ -1864,7 +1867,7 @@ span.join-date {
 	.footer-logo {margin-left:35%;}
 	#contact-page form {display:block;}
 	.subscribe-box {display:block;}
-	h2.icon {font-size:36px;}
+	h2.icon {font-size:20px;}
 	.cactus-note.ct-time {font-size:16px;}
 	.infor h4 {font-size:24px; line-height:30px;}
 	.posts-txt {font-size:18px;}
@@ -1877,6 +1880,9 @@ span.join-date {
 	.map-frame {margin-bottom:30px;}
 	
 	.review-xs-thumbs .post {margin-bottom:20px;}
+	#bottom-banner{
+		padding : 5px !important;
+	}
 }
 
 /* Extra Small Devices, Phones */ 
