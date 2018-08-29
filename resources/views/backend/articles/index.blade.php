@@ -26,7 +26,15 @@
           <h3 class="panel-title">Search</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('articles.index') }}">            
+          <form class="form-inline" role="form" method="GET" action="{{ route('articles.index') }}">   
+            <div class="form-group">
+              <label for="email">Status </label>
+              <select class="form-control" name="status" id="status">
+                <option value="">--All--</option>                
+                  <option value="1" {{ 1 == $status ? "selected" : "" }}>Published</option>
+                  <option value="2" {{ 2 == $status ? "selected" : "" }}>Draft</option>
+              </select>
+            </div>          
             <div class="form-group">
               <label for="email">Category </label>
               <select class="form-control" name="cate_id" id="cate_id">

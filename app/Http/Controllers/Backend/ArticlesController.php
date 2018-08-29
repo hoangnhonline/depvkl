@@ -24,6 +24,7 @@ class ArticlesController extends Controller
     {   
         
         $cate_id = isset($request->cate_id) ? $request->cate_id : null;
+        $status = isset($request->status) ? $request->status : null;
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
@@ -31,6 +32,9 @@ class ArticlesController extends Controller
 
         if( $cate_id > 0){
             $query->where('cate_id', $cate_id);
+        }
+         if( $status > 0){
+            $query->where('status', $status);
         }
         // check editor
         if( Auth::user()->role < 3 ){
