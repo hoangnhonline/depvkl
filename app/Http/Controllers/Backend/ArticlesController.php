@@ -112,14 +112,13 @@ class ArticlesController extends Controller
         $this->validate($request,[            
             'cate_id' => 'required',            
             'title' => 'required',            
-            'slug' => 'required|unique:articles,slug',
+            'slug' => 'required',
         ],
         [            
-            'cate_id.required' => 'Bạn chưa chọn danh mục',            
-            'title.required' => 'Bạn chưa nhập tiêu đề',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.'
-        ]);       
+            'cate_id.required' => 'Please choose category',            
+            'title.required' => 'Please input title',
+            'slug.required' => 'Please input slug'            
+        ]);           
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);      
         
@@ -205,13 +204,12 @@ class ArticlesController extends Controller
         $this->validate($request,[            
             'cate_id' => 'required',            
             'title' => 'required',            
-            'slug' => 'required|unique:articles,slug,'.$dataArr['id'],
+            'slug' => 'required',
         ],
         [            
-            'cate_id.required' => 'Bạn chưa chọn danh mục',            
-            'title.required' => 'Bạn chưa nhập tiêu đề',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.'
+            'cate_id.required' => 'Please choose category',            
+            'title.required' => 'Please input title',
+            'slug.required' => 'Please input slug'            
         ]);       
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
