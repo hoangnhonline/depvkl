@@ -28,7 +28,7 @@ class ArticlesController extends Controller
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
-        $query = Articles::where('status', 1);
+        $query = Articles::whereRaw('1');
 
         if( $cate_id > 0){
             $query->where('cate_id', $cate_id);
