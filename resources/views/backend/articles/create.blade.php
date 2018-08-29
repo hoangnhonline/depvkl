@@ -84,7 +84,15 @@
                       Video nổi bật
                     </label>
                   </div>               
-                </div>                               
+                </div> 
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="is_gg" value="1" {{ old('is_gg') == 1 ? "checked" : "" }}>
+                      Google drive
+                    </label>
+                  </div>               
+                </div>                              
                 <div class="form-group">
                   <label>Chi tiết</label>
                   <textarea class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
@@ -94,6 +102,10 @@
             </div>                   
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Save</button>
+              <input type="hidden" name="status" id="status" value="2">
+              
+              <button type="button" id="btnPublish" class="btn btn-info btn-sm">Publish</button>
+              
               <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('articles.index')}}">Cancel</a>
             </div>
             
@@ -145,6 +157,10 @@
 <script type="text/javascript">
  
 $(document).ready(function(){
+   $('#btnPublish').click(function(){
+      $('#status').val(1);
+      $('#formSubmit').submit();
+    });
       $(".select2").select2();
       var editor = CKEDITOR.replace( 'content',{
           language : 'vi',

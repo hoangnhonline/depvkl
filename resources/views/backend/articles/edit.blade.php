@@ -17,7 +17,7 @@
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('articles.index') }}" style="margin-bottom:5px">Back</a>
     <a class="btn btn-primary btn-sm" href="{{ route('detail', [$detail->slug, $detail->id ]) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
-    <form role="form" method="POST" action="{{ route('articles.update') }}">
+    <form role="form" method="POST" id="formSubmit" action="{{ route('articles.update') }}">
     <div class="row">
       <!-- left column -->
       <input name="id" value="{{ $detail->id }}" type="hidden">
@@ -89,7 +89,14 @@
                     </label>
                   </div>               
                 </div>
-                
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="is_gg" value="1" {{ old('is_gg', $detail->is_gg) == 1 ? "checked" : "" }}>
+                      Google drive
+                    </label>
+                  </div>               
+                </div>
                 <div class="form-group">
                   <label>Detail</label>
                   <textarea class="form-control" rows="4" name="content" id="content">{{ $detail->content }}</textarea>
@@ -100,12 +107,14 @@
       
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Save</button>
+              <input type="hidden" name="status" id="status" value="{{ $detail->status }}">
+              @if($detail->status == 2)
+              <button type="button" id="btnPublish" class="btn btn-info btn-sm">Publish</button>
+              @endif
               <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('articles.index')}}">Cancel</a>
-            </div>
-            
+            </div>            
         </div>
-        <!-- /.box -->     
-
+        <!-- /.box -->
       </div>
       <div class="col-md-4">
         <!-- general form elements -->
@@ -150,6 +159,10 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
+    $('#btnPublish').click(function(){
+      $('#status').val(1);
+      $('#formSubmit').submit();
+    });
       $(".select2").select2();
       var editor = CKEDITOR.replace( 'content',{
           language : 'vi',

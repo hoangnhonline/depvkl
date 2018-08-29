@@ -44,7 +44,7 @@ class ArticlesController extends Controller
             $query->where('alias', 'LIKE', '%'.$title.'%');
         }
 
-        $items = $query->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(20);
+        $items = $query->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(200);
         
         $cateArr = ArticlesCate::where('status', 1)->get();
         
@@ -127,9 +127,11 @@ class ArticlesController extends Controller
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['type'] = 1;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
-        $dataArr['is_gg'] = 1;
-        $dataArr['status'] = 1;
-        $dataArr['encode_link'] = Helper::encodeLink($dataArr['video_url']);
+        $dataArr['is_gg'] = isset($dataArr['is_gg']) ? 1 : 0;
+        if($dataArr['is_gg'] == 1){
+            $dataArr['encode_link'] = Helper::encodeLink($dataArr['video_url']);    
+        }
+        
         $rs = Articles::create($dataArr);
 
         $object_id = $rs->id;
@@ -216,8 +218,11 @@ class ArticlesController extends Controller
         
         $dataArr['type'] = 1;
         $dataArr['updated_user'] = Auth::user()->id;
-        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
-         
+        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;
+        $dataArr['is_gg'] = isset($dataArr['is_gg']) ? 1 : 0;
+        if($dataArr['is_gg'] == 1){
+            $dataArr['encode_link'] = Helper::encodeLink($dataArr['video_url']);    
+        } 
         $model = Articles::find($dataArr['id']);
 
         $model->update($dataArr);

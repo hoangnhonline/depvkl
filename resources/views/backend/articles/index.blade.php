@@ -70,6 +70,7 @@
               <th style="width: 1%">#</th>              
               <th width="120px">Thumbnail</th>
               <th>Title</th>
+              <th width="120px">Original Site</th>
               <th width="1%;white-space:nowrap">Action</th>
             </tr>
             <tbody>
@@ -91,6 +92,7 @@
 
                   <p>{{ $item->description }}</p>
                 </td>
+                <td>{{ $item->site_name }}</td>
                 <td style="white-space:nowrap"> 
                   <a class="btn btn-default btn-sm" href="{{ route('detail', [$item->slug, $item->id ]) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> View</a>                 
                   <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
