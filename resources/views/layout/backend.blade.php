@@ -113,23 +113,7 @@
 <script src="{{ URL::asset('public/admin/dist/js/ckeditor/ckeditor.js') }}"></script>
 
 <script type="text/javascript" type="text/javascript">
-$(document).on('click', '#btnSaveNoti', function(){
-  var content = CKEDITOR.instances['contentNoti'].getData();
-  if(content != ''){    
-    $.ajax({
-      url : $('#formNoti').attr('action'),
-      type : "POST",
-      data : {
-        data : $('#formNoti').serialize(),
-        content : content
-      },
-      success : function(data){
-        alert('Gửi tin nhắn thành công.');
-        $('#notifiModal').modal('hide');
-      }
-    });
-  }
-});
+
 $(document).ready(function(){
   $('img.lazy').lazyload();
   $.ajaxSetup({
@@ -138,16 +122,6 @@ $(document).ready(function(){
       }
   });
 
-  $('.sendNoti').click(function(){
-    var customer_id = $(this).data('customer-id');
-    var order_id = $(this).data('order-id');
-    var notiType = $(this).data('type');
-    $('#customer_id_noti').val(customer_id);
-    $('#order_id_noti').val(order_id);
-    $('#notifiModal').modal('show');
-    $('#notifiModal  #type').val(notiType);
-    processNotiType(notiType);
-  });
   $('#notifiModal  #type').change(function(){
     processNotiType($(this).val())
   });
@@ -160,17 +134,7 @@ $(document).ready(function(){
 
   config.removeButtons = 'Underline,Subscript,Superscript';
 };
-  var editor2 = CKEDITOR.replace('contentNoti',{
-          language : 'vi',
-          height : 100,
-          toolbarGroups : [            
-            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },          
-            { name: 'links', groups: [ 'links' ] },           
-            '/',
-            
-          ]
-      });
-});
+
 
 function processNotiType(type){
   if(type == 1){
