@@ -48,7 +48,7 @@ class ArticlesController extends Controller
         
         $cateArr = ArticlesCate::where('status', 1)->get();
         
-        return view('backend.articles.index', compact( 'items', 'cateArr' , 'title', 'cate_id' ));
+        return view('backend.articles.index', compact( 'items', 'cateArr' , 'title', 'cate_id','status' ));
     }
     public function check($image_url){
          $ch = curl_init();
