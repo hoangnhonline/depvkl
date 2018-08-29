@@ -134,15 +134,7 @@ $(document).ready(function(){
 
   config.removeButtons = 'Underline,Subscript,Superscript';
 };
-
-
-function processNotiType(type){
-  if(type == 1){
-    $('#notifiModal #url-km').show();
-  }else{
-    $('#notifiModal #url-km').hide();
-  }
-}
+});
 </script>
 <style type="text/css">
   .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
