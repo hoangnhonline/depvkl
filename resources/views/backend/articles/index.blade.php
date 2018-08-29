@@ -26,7 +26,7 @@
           <h3 class="panel-title">Search</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('articles.index') }}">   
+          <form class="form-inline" role="form" method="GET" id="searchForm" action="{{ route('articles.index') }}">   
             <div class="form-group">
               <label for="email">Status </label>
               <select class="form-control" name="status" id="status">
@@ -139,6 +139,9 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
+  $('#status, #cate_id').change(function(){
+    $('#searchForm').submit();
+  });
   $('#parent_id').change(function(){
     $.ajax({
         url: $('#route_get_cate_by_parent').val(),
