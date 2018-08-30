@@ -104,6 +104,11 @@
                 </td>
                 <td>{{ $item->site_name }}</td>
                 <td style="white-space:nowrap"> 
+                  @php
+                  if(!$item->slug){
+                    $item->slug = 'review';
+                  }
+                  @endphp
                   <a class="btn btn-default btn-sm" href="{{ route('detail', [$item->slug, $item->id ]) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> View</a>                 
                   <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
                   
