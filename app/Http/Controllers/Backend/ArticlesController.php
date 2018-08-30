@@ -27,6 +27,7 @@ class ArticlesController extends Controller
         $status = isset($request->status) ? $request->status : null;
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
+        $site_name = isset($request->site_name) && $request->site_name != '' ? $request->site_name : '';
         
         $query = Articles::whereRaw('1');
 
@@ -43,12 +44,15 @@ class ArticlesController extends Controller
         if( $title != ''){
             $query->where('alias', 'LIKE', '%'.$title.'%');
         }
+        if( $site_name != ''){
+            $query->where('site_name', $site_name);
+        }
 
         $items = $query->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(200);
         
         $cateArr = ArticlesCate::where('status', 1)->get();
         
-        return view('backend.articles.index', compact( 'items', 'cateArr' , 'title', 'cate_id','status' ));
+        return view('backend.articles.index', compact( 'items', 'cateArr' , 'title', 'cate_id','status', 'site_name' ));
     }
     public function check($image_url){
          $ch = curl_init();

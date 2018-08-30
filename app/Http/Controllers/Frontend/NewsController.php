@@ -47,6 +47,29 @@ class NewsController extends Controller
             $video_url = (isset($tmp['720p']) && $tmp['720p'] != '' ) ? $tmp['720p'] : $tmp['360p'];            
             $poster_url = $detail->image_url;
                 
+        }elseif($detail->site_name == 'redtube'){
+
+            $ch = curl_init();
+            curl_setopt( $ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1" );
+            curl_setopt( $ch, CURLOPT_URL, $detail->video_url );
+            curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+            //if(strpos($origin_url, 'xvideos') > 0 || strpos($origin_url, 'xnxx.com') > 0){
+            //curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3B48b Safari/419.3');    
+            //}      
+            $result = curl_exec($ch);            
+            $tmp = explode('"videoUrl":"', $result);
+            if(isset($tmp[2])){
+                $tmp = explode('"},{"', $tmp[2]);
+                if($tmp[0]){
+                    $video_url = str_replace("\/", "/", $tmp[0]);                    
+                }
+            }           
+            curl_close($ch);
+            $crawler = new simple_html_dom();
+            // Load HTML from a string
+            $crawler->load($result);
+            $poster_url = str_replace("eGJF8f", "eaAaGwFb", $crawler->find('meta[property="og:image"]', 0)->content);          
         }else{
                 $ch = curl_init();
             curl_setopt( $ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1" );
@@ -79,7 +102,7 @@ class NewsController extends Controller
             $tmpThumb = explode("setThumbUrl('", $result);
             if(isset($tmpThumb[1])){
                 $tmpThum2 = explode("');", $tmpThumb[1]);         
-                $poster_url = $tmpThum2[0];
+                $poster_url = str_replace('thumbslll','thumbs169lll',$tmpThum2[0]);
             }  
         }
               

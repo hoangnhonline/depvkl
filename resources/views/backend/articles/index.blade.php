@@ -26,7 +26,17 @@
           <h3 class="panel-title">Search</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" id="searchForm" action="{{ route('articles.index') }}">   
+          <form class="form-inline" role="form" method="GET" id="searchForm" action="{{ route('articles.index') }}">
+            <div class="form-group">
+              <label for="email">Site </label>
+              <select class="form-control" name="site_name" id="site_name">
+                <option value="">--All--</option>                
+                  <option value="xvideos" {{ 'xvideos' == $site_name ? "selected" : "" }}>xvideos</option>
+                  <option value="xnxx" {{ 'xnxx' == $site_name ? "selected" : "" }}>xnxx</option>
+                  <option value="redtube" {{ 'redtube' == $site_name ? "selected" : "" }}>redtube</option>
+                  <option value="xhamster" {{ 'xhamster' == $site_name ? "selected" : "" }}>xhamster</option>
+              </select>
+            </div>
             <div class="form-group">
               <label for="email">Status </label>
               <select class="form-control" name="status" id="status">
@@ -141,7 +151,7 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
-  $('#status, #cate_id').change(function(){
+  $('#status, #cate_id, #site_name').change(function(){
     $('#searchForm').submit();
   });
   $('#parent_id').change(function(){
