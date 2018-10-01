@@ -48,7 +48,7 @@
          <!-- HEADER -->
          <div class="row header-top">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8">
-               <a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logo.png') }}" class="main-logo img-responsive" alt="Muvee Reviews" title="Muvee Reviews"></a>
+               <a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logox.png') }}" class="main-logo img-responsive" alt="Muvee Reviews" title="Muvee Reviews"></a>
             </div>
             <?php 
             $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])->orderBy('display_order', 'asc')->get();

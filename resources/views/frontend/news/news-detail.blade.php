@@ -15,7 +15,7 @@
                    <div class="">
                       <div id="videos">
                         <div class="hero-unit" style="position:relative"> 
-                          <video id='videoPlayer' style="position:relative" preload='metadata' controls poster="{{ $poster_url }}" style="border: 1px solid; background: black;">
+                          <video id='videoPlayer' style="position:relative" preload='metadata' controls poster="" style="border: 1px solid; background: black;">
                                     <source id="mp4Source" src="{{ $video_url }}" type="video/mp4">               
                                 </video>        
                             </div>
@@ -127,8 +127,10 @@
            $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
            ?>
           <div class="col-lg-4 hidden-md hidden-sm">
+            
               @if($bannerArr)
-              @foreach($bannerArr as $banner)               
+              @foreach($bannerArr as $banner)
+              <div style="margin-bottom: 10px;">               
                @if($banner->ads_url !='')
                <a href="{{ $banner->ads_url }}" class="video-right-banner">
                @endif
@@ -136,8 +138,10 @@
               @if($banner->ads_url !='')
                </a>
                @endif
+               </div>
                @endforeach
               @endif
+              
            </div>
        </div>
        <div class="clearfix spacer"></div>
@@ -154,7 +158,7 @@
                          <a class="post-thumb" href="{{ route('detail', [ $post->slug, $post->id ]) }}">
                             <span class="play-btn-border" title="Play"><i class="fa fa-play-circle headline-round" aria-hidden="true"></i></span>
                             <div class="cactus-note ct-time font-size-1"><span>{{ $post->duration }}</span></div>
-                            <img class="img-responsive" src="{{ $post->image_url }}" alt="{!! $post->title !!}">
+                            <img class="img-responsive" src="{{ $post->image_urlxxx }}" alt="{!! $post->title !!}">
                          </a>
                       </div>
                       <div class="infor">
