@@ -5,8 +5,7 @@
       <title>@yield('title')</title>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
        <meta http-equiv="content-language" content="vi"/>
-       <meta name="description" content="@yield('site_description')"/>
-       <meta name="keywords" content="@yield('site_keywords')"/>
+       <meta name="description" content="@yield('site_description')"/>       
        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
        <link rel="shortcut icon" href="@yield('favicon')" type="image/x-icon"/>
        <link rel="canonical" href="{{ url()->current() }}"/>        
@@ -48,7 +47,7 @@
          <!-- HEADER -->
          <div class="row header-top">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8">
-               <a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logox.png') }}" class="main-logo img-responsive" alt="Muvee Reviews" title="Muvee Reviews"></a>
+               <h1><a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logox.png') }}" class="main-logo img-responsive" alt="lotontv.com" title="lotontv.com"></a></h1>
             </div>
             <?php 
             $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
@@ -95,6 +94,20 @@
       .hero-unit video {
           width: 100%;
       }
+      @media only screen and (max-width: 768px)  {
+        .navbar{
+          min-height: 0px;
+          margin-bottom: 0px;
+        }
+        .header-top{
+          padding-top: 0px;
+        }
+      }
+      .main-logo{
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+      
       </style>
       @yield('javascript_page')
 

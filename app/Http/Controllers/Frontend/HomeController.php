@@ -38,7 +38,9 @@ class HomeController extends Controller
         foreach($articleCateHot as $cate){
             $postArr[$cate->id] = Articles::where('cate_id', $cate->id)->where('status', 1)->orderBy('id', 'desc')->limit(12)->get();
         }
-        $seo['title'] = $seo['description'] =$seo['keywords'] = "DepVKL.us";
+        $seo['title'] = "Lò Tôn TV - Kênh Xem Phim Sex Bá Đạo";
+        $seo['description'] = "Xem phim sex full hd không che miễn phí tại Lò Tôn TV. Tuyển tập phim heo, phim 18+, phim sex hạng nặng nhiều thể loại. Gái Nhật, Việt, Hàn, Âu Mỹ cực dâm có hết trong này.";
+
         return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo', 'articleCateHot', 'postArr'));
 
     }
