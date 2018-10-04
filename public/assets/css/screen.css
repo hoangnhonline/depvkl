@@ -96,7 +96,7 @@ h2.title {
 	margin:30px 0;
 }
 
-h2.icon {
+h1.icon {
 	border-left:0;
 	padding-left:0;
 	font-weight:900 !important;
@@ -111,7 +111,7 @@ h2.icon {
 	margin:0px 0px 15px 0;
 }
 
-h2.icon i {
+h1.icon i {
 	transform: skew(15deg);
     -webkit-transform: skew(15deg);
     -moz-transform: skew(15deg);
@@ -131,7 +131,7 @@ h2.icon i {
 	height:50px;
 }
 
-h2.icon:hover i {
+h1.icon:hover i {
 	border:5px solid var(--secondary-color);
 }
 
@@ -1819,7 +1819,7 @@ span.join-date {
 	.carousel-control i {font-size:36px;}
 	
 	.subscribe-box {display:block;}
-	h2.icon {font-size:20px;}
+	h1.icon {font-size:20px;}
 	.cactus-note.ct-time {font-size:16px;}
 	.infor h4 {font-size:24px; line-height:30px;}
 	.posts-txt {font-size:18px;}
@@ -1837,7 +1837,7 @@ span.join-date {
 	
 	
 	.subscribe-box {display:block;}
-	h2.icon {font-size:20px;}
+	h1.icon {font-size:20px;}
 	.cactus-note.ct-time {font-size:16px;}
 	.infor h4 {font-size:24px; line-height:30px;}
 	.posts-txt {font-size:18px;}
@@ -1867,7 +1867,7 @@ span.join-date {
 	.footer-logo {margin-left:35%;}
 	#contact-page form {display:block;}
 	.subscribe-box {display:block;}
-	h2.icon {font-size:20px;}
+	h1.icon {font-size:20px;}
 	.cactus-note.ct-time {font-size:16px;}
 	.infor h4 {font-size:24px; line-height:30px;}
 	.posts-txt {font-size:18px;}

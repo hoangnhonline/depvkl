@@ -107,7 +107,11 @@
         margin-top: 0px;
         margin-bottom: 0px;
       }
-      
+      @media only screen and (max-width: 480px){
+        .navbar-default .navbar-toggle {   
+            top: -70px;
+        }
+      }
       </style>
       @yield('javascript_page')
 

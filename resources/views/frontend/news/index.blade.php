@@ -30,7 +30,7 @@
           <div class="row auto-clear">
              <!-- RELATED VIDEOS -->
              <div class="col-lg-12 col-md-12 col-sm-12 category-video-grid">
-                <h2 class="icon"><i class="fa fa-trophy" aria-hidden="true"></i>{!! $cateDetail->name !!}</h2>
+                <h1 class="icon"><i class="fa fa-trophy" aria-hidden="true"></i>{!! $cateDetail->name !!}</h1>
                 <!-- VIDEO POSTS ROW -->
                 <div class="row">
                     @foreach( $articlesArr as $post )
