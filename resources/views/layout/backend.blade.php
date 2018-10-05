@@ -89,6 +89,7 @@
 <input type="hidden" id="upload_url" value="{{ config('moigioi.upload_url') }}">
 <input type="hidden" id="app_url" value="{{ env('APP_URL') }}">
 <input type="hidden" id="url_open_kc_finder" value="{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=images') }}">
+<input type="hidden" id="route-ajax-tag-list" value="{{ route('tag.ajax-list') }}">
 <script type="text/javascript">
   var public_url = '{{ env('APP_URL') }}/public';
 </script>

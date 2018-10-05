@@ -46,7 +46,51 @@ function multiUpload() {
 $(document).ready(function(){
 
   "use strict";
-
+  $(document).on('click', '#btnSaveTagAjax', function(){
+      $.ajax({
+        url : $('#formAjaxTag').attr('action'),
+        data: $('#formAjaxTag').serialize(),
+        type : "post", 
+        success : function(str_id){          
+          $('#btnCloseModalTag').click();
+          $.ajax({
+            url : $('#route-ajax-tag-list').val(),
+            data: { 
+              type : 1 ,
+              tagSelected : $('#tags').val(),
+              str_id : str_id
+            },
+            type : "get", 
+            success : function(data){
+                $('#tags').html(data);
+                $('#tags').select2('refresh');
+                
+            }
+          });
+        }
+      });
+   }); 
+  $('#btnAddTag').click(function(){
+          $('#tagModal').modal('show');
+      });
+   $('#contentTag #name').change(function(){
+         var name = $.trim( $(this).val() );
+         if( name != '' && $('#contentTag #slug').val() == ''){
+            $.ajax({
+              url: $('#route_get_slug').val(),
+              type: "POST",
+              async: false,      
+              data: {
+                str : name
+              },              
+              success: function (response) {
+                if( response.str ){                  
+                  $('#contentTag #slug').val( response.str );
+                }                
+              }
+            });
+         }
+      });
   $(".select2").select2();
   $('#is_sale').change(function(){
     if($(this).prop('checked') == true){

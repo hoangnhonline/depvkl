@@ -10,7 +10,8 @@ use App\Models\ArticlesCate;
 use App\Models\Articles;
 use App\Models\MetaData;
 use App\Models\Post;
-
+use App\Models\Tag;
+use App\Models\TagObjects;
 use Helper, File, Session, Auth, Image;
 
 class ArticlesController extends Controller
@@ -73,34 +74,12 @@ class ArticlesController extends Controller
     */
     public function create(Request $request)
     {
-        // set_time_limit(10000);
-        // $articleCate = ArticlesCate::orderBy('display_order', 'desc')->get();
-        // foreach($articleCate as $cate){             
-        //     $list = Articles::where('cate_id', $cate->id)->offset(200)->limit(100)->get();
-        //     foreach($list as $a){
-        //         $code = $this->check($a->image_url);
-        //         var_dump($code, $a->image_url);
-        //         echo "<br>";
-        //         if($code != 200){
-        //             $a->delete();
-        //         }
-        //     }
-        // }
-        // die;
-        // // $arr = Articles::offset(0)->limit(2000)->get();
-        // // foreach($arr as $a){
-        // //     $code = $this->check($a->image_url);
-        // //     var_dump($code, $a->image_url);
-        // //     echo "<br>";
-        // //     if($code != 200){
-        // //         $a->delete();
-        // //     }
-        // // }
+        
         $cateArr = ArticlesCate::where('status', 1)->get();
         
         $cate_id = $request->cate_id;       
-
-        return view('backend.articles.create', compact( 'cateArr', 'cate_id'));
+         $tagArr = Tag::where('type', 1)->orderBy('id', 'desc')->get();
+        return view('backend.articles.create', compact( 'cateArr', 'cate_id', 'tagArr'));
     }
 
     /**
@@ -141,6 +120,18 @@ class ArticlesController extends Controller
         $object_id = $rs->id;
 
         $this->storeMeta( $object_id, 0, $dataArr);
+        // xu ly tags
+        if( !empty( $dataArr['tags'] ) && $object_id ){
+            
+
+            foreach ($dataArr['tags'] as $tag_id) {
+                $model = new TagObjects;
+                $model->object_id = $object_id;
+                $model->tag_id  = $tag_id;
+                $model->type = 1;
+                $model->save();
+            }
+        }
 
         Session::flash('message', 'Success.');
 
@@ -192,8 +183,21 @@ class ArticlesController extends Controller
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
         }
+         $tmpArr = TagObjects::where(['type' => 1, 'object_id' => $id])->get();
+        
+        if( $tmpArr->count() > 0 ){
+            foreach ($tmpArr as $value) {
+                $tagSelected[] = $value->tag_id;
+            }
+        }
+        
+        $tagArr = Tag::where('type', 1)->get();
+        $meta = (object) [];
+        if ( $detail->meta_id > 0){
+            $meta = MetaData::find( $detail->meta_id );
+        }
 
-        return view('backend.articles.edit', compact('detail', 'cateArr', 'meta'));
+        return view('backend.articles.edit', compact('detail', 'cateArr', 'meta','tagSelected', 'tagArr'));
     }
 
     /**
@@ -232,7 +236,18 @@ class ArticlesController extends Controller
         $model->update($dataArr);
         
         $this->storeMeta( $dataArr['id'], $dataArr['meta_id'], $dataArr);
-      
+        TagObjects::where(['object_id' => $dataArr['id'], 'type' => 1])->delete();
+        // xu ly tags
+        if( !empty( $dataArr['tags'] ) ){
+                       
+            foreach ($dataArr['tags'] as $tag_id) {
+                $modelTagObject = new TagObjects; 
+                $modelTagObject->object_id = $dataArr['id'];
+                $modelTagObject->tag_id  = $tag_id;
+                $modelTagObject->type = 1;
+                $modelTagObject->save();
+            }
+        }
         Session::flash('message', 'Success.');        
 
         return redirect()->route('articles.edit', $dataArr['id']);

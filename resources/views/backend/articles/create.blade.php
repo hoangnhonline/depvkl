@@ -92,7 +92,22 @@
                       Google drive
                     </label>
                   </div>               
-                </div>                              
+                </div>     
+                 <div class="input-group">
+                  <label>Tags</label>
+                  <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
+                    @if( $tagArr->count() > 0)
+                      @foreach( $tagArr as $value )
+                      <option value="{{ $value->id }}" {{ (old('tags') && in_array($value->id, old('tags'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                      @endforeach
+                    @endif
+                  </select>
+                  <span class="input-group-btn">
+                    <button style="margin-top:24px" class="btn btn-primary btn-sm" id="btnAddTag" type="button" data-value="3">
+                      Tạo mới
+                    </button>
+                  </span>
+                </div>                           
                 <div class="form-group">
                   <label>Chi tiết</label>
                   <textarea class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
@@ -132,10 +147,6 @@
               </div>  
 
               <div class="form-group">
-                <label>Meta keywords</label>
-                <textarea class="form-control" rows="4" name="meta_keywords" id="meta_keywords">{{ old('meta_keywords') }}</textarea>
-              </div>  
-              <div class="form-group">
                 <label>Custom text</label>
                 <textarea class="form-control" rows="4" name="custom_text" id="custom_text">{{ old('custom_text') }}</textarea>
               </div>
@@ -151,7 +162,38 @@
   </section>
   <!-- /.content -->
 </div>
+<div id="tagModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+    <form method="POST" action="{{ route('tag.ajax-save') }}" id="formAjaxTag">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tạo mới tag</h4>
+      </div>
+      <div class="modal-body" id="contentTag">
+          <input type="hidden" name="type" value="1">
+           <!-- text input -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Tags<span class="red-star">*</span> ( Cách nhau bằng dấu ;  )</label>
+              <textarea class="form-control" name="str_tag" id="str_tag" rows="4" >{{ old('str_tag') }}</textarea>
+            </div>
+            
+          </div>
+          <div classs="clearfix"></div>
+      </div>
+      <div style="clear:both"></div>
+      <div class="modal-footer" style="text-align:center">
+        <button type="button" class="btn btn-primary btn-sm" id="btnSaveTagAjax"> Save</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" id="btnCloseModalTag">Close</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
 @stop
 @section('javascript_page')
 <script type="text/javascript">
