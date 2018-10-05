@@ -51,34 +51,25 @@
                   <label>Facebook</label>
                   <input type="text" class="form-control" name="facebook_fanpage" id="facebook_fanpage" value="{{ $settingArr['facebook_fanpage'] }}">
                 </div>
+                
                 <div class="form-group">
-                  <label>Facebook APP ID</label>
-                  <input type="text" class="form-control" name="facebook_appid" id="facebook_appid" value="{{ $settingArr['facebook_appid'] }}">
-                </div>
-                <div class="form-group">
-                  <label>Google +</label>
-                  <input type="text" class="form-control" name="google_fanpage" id="google_fanpage" value="{{ $settingArr['google_fanpage'] }}">
+                  <label>Verify WOT</label>
+                  <input type="text" class="form-control" name="wot" id="wot" value="{{ $settingArr['wot'] }}">
                 </div>
                 <div class="form-group">
-                  <label>Twitter</label>
-                  <input type="text" class="form-control" name="twitter_fanpage" id="twitter_fanpage" value="{{ $settingArr['twitter_fanpage'] }}">
+                  <label>Verify Norton</label>
+                  <input type="text" class="form-control" name="norton" id="norton" value="{{ $settingArr['norton'] }}">
                 </div>
                 <div class="form-group">
-                  <label>Hotline</label>
-                  <input type="text" class="form-control" name="hotline" id="hotline" value="{{ $settingArr['hotline'] }}">
+                  <label>Title footer</label>
+                  <input type="text" class="form-control" name="title_footer" id="title_footer" value="{{ $settingArr['title_footer'] }}">
                 </div>
+                
                 <div class="form-group">
-                  <label>Giới thiệu sơ lược</label>
-                  <textarea class="form-control" rows="3" name="gioi_thieu_so_luoc" id="gioi_thieu_so_luoc">{{ $settingArr['gioi_thieu_so_luoc'] }}</textarea>
+                  <label>Content on footer</label>
+                  <textarea class="form-control" rows="3" name="content_footer" id="content_footer">{{ $settingArr['content_footer'] }}</textarea>
                 </div>
-                <div class="form-group">
-                  <label>Thông tin footer</label>
-                  <textarea class="form-control" rows="3" name="cty_info" id="cty_info">{{ $settingArr['cty_info'] }}</textarea>
-                </div>
-                <div class="form-group" style="display:none">
-                  <label>Email CC</label>
-                  <textarea class="form-control" rows="3" name="email_cc" id="email_cc">{{ $settingArr['email_cc'] }}</textarea>
-                </div>
+                
                 <div class="form-group">
                   <label>Code google analystic </label>
                   <input type="text" class="form-control" name="google_analystic" id="google_analystic" value="{{ $settingArr['google_analystic'] }}">
@@ -145,12 +136,7 @@
               <div class="form-group">
                 <label>Meta desciption <span class="red-star">*</span></label>
                 <textarea class="form-control" rows="4" name="site_description" id="site_description">{{ $settingArr['site_description'] }}</textarea>
-              </div>  
-
-              <div class="form-group">
-                <label>Meta keywords <span class="red-star">*</span></label>
-                <textarea class="form-control" rows="4" name="site_keywords" id="site_keywords">{{ $settingArr['site_keywords'] }}</textarea>
-              </div>  
+              </div>
               <div class="form-group">
                 <label>Custom text</label>
                 <textarea class="form-control" rows="4" name="custom_text" id="custom_text">{{ $settingArr['custom_text'] }}</textarea>
