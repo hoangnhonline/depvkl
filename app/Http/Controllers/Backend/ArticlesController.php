@@ -176,7 +176,7 @@ class ArticlesController extends Controller
         $tagSelected = [];
 
         $detail = Articles::find($id);
-        $detail->slug = str_slug($detail->title);
+        $detail->slug = $detail->slug ? $detail->slug : '';
         $cateArr = ArticlesCate::where('status', 1)->get();    
 
         $meta = (object) [];
