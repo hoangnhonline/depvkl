@@ -53,17 +53,13 @@
                       <li class="social-youtube"><a href="#" class="fa fa-youtube social-icons"></a></li>
                       <li class="social-rss"><a href="#" class="fa fa-rss social-icons"></a></li>
                    </ul>
-                   <!-- <ul class="footer-tags">
-                      <li><a href="#">videos</a></li>
-                      <li><a href="#">premium</a></li>
-                      <li><a href="#">hair</a></li>
-                      <li><a href="#">beauty</a></li>
-                      <li><a href="#">ranking</a></li>
-                      <li><a href="#">lifestyle</a></li>
-                      <li><a href="#">sport</a></li>
-                      <li><a href="#">money</a></li>
-                      <li><a href="#">comments</a></li>
-                   </ul> -->
+                   @if($tagSelected->count() > 0)
+                   <ul class="footer-tags">
+                      @foreach($tagSelected as $tag)                      
+                      <li><a href="{{ route('tag', $tag->slug) }}" title="{!! $tag->name !!}">{!! $tag->name !!}</a></li>
+                      @endforeach
+                   </ul>
+                   @endif                 
                    <div class="share-input">
                       <input type="text" value="{{ url()->current() }}">
                       <span class="fa fa-chain sharelinkicon"></span>

@@ -1,55 +1,62 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
-  
-
 @section('content')
-<section class="col-sm-8 col-xs-12 block-sitemain">
-
-    <article class="block block-breadcrumb">
-      <div class="block-contents">
-        <ul>
-          <li class="active"><h2><a href="{{ route('tag', $detail->slug) }}">Tag : '{{ $detail->name }}'</a></h2></li>
-        </ul>
-      </div>
-    </article><!-- /block-breadcrumb -->    
-
-    <article class="block block-article-list clearfix">
-      <div class="col-sm-12 col-xs-12">
-        <div class="row">
-          <div class="block-contents">
-            <ul class="article-list-news">
-              @foreach( $articlesArr as $articles )
-              <li class="article-news-item">
-                <div class="article-news-item-head">
-                  <a id="" href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}"><img id="" title="" src="{{ Helper::showImage($articles->image_url) }}" alt=""></a>
+<div class="row">    
+   
+    <div class="col-lg-12 col-md-12">
+       <!-- BREADCRUMB -->
+       <ol class = "breadcrumb">
+          <li><a href="{{ route('home') }}">Trang chủ</a></li>          
+          <li class = "active">Tag : '{{ $detail->name }}'</li>
+       </ol>
+       <!-- CATEGORY GRID -->
+       <section id="category">
+          <div class="row auto-clear">
+             <!-- RELATED VIDEOS -->
+             <div class="col-lg-12 col-md-12 col-sm-12 category-video-grid">
+                <h1 class="icon"><i class="fa fa-trophy" aria-hidden="true"></i>Tag : '{{ $detail->name }}'</h1>
+                <!-- VIDEO POSTS ROW -->
+                <div class="row">
+                  
+                    @foreach( $articlesArr as $post )
+                   <article class="col-lg-3 col-md-6 col-sm-4">
+                      <!-- POST L size -->
+                      <div class="post post-medium">
+                         <div class="thumbr">
+                            <a class="afterglow post-thumb" href="{{ route('detail', [ $post->slug, $post->id ]) }}">
+                               <span class="play-btn-border" title="Play"><i class="fa fa-play-circle headline-round" aria-hidden="true"></i></span>
+                               <div class="cactus-note ct-time font-size-1"><span>{{ $post->duration }}</span></div>
+                               <img class="img-responsive" src="{!! $post->image_url !!}" alt="{!! $post->title !!}">
+                            </a>
+                         </div>
+                         <div class="infor">
+                            <h4>
+                               <a class="title" href="{{ route('detail', [ $post->slug, $post->id ]) }}">{!! $post->title !!}</a>
+                            </h4>
+                            <span class="posts-txt" title="{!! $post->title !!}"><i class="fa fa-thumbs-up" aria-hidden="true"></i>20.895</span>
+                            <div class="ratings">
+                               <i class="fa fa-star" aria-hidden="true"></i>
+                               <i class="fa fa-star" aria-hidden="true"></i>
+                               <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                               <i class="fa fa-star-o"></i>
+                               <i class="fa fa-star-half"></i>
+                            </div>
+                         </div>
+                      </div>
+                   </article>
+                    @endforeach
                 </div>
-                <div class="article-news-item-description">
-                  <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="">{{ $articles->title }}</a>
-                  <div class="nd-time">{{ date('d-m-Y', strtotime($articles->created_at)) }}  <small>08:05 </small></div>
-                  <p>{{ $articles->description }}</p>
-                </div>
-              </li>
-              @endforeach
-             
-            </ul>
-            <!--<nav class="block-pagination">
-              <ul class="pagination">
-                <li><a class="selected" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#" aria-label="Previous">Trang sau</a></li>
-                <li><a href="#" aria-label="Next">Trang cuối</a></li>
-              </ul>-->
-            </nav>
+                <div class="clearfix spacer"></div>
+             </div>
           </div>
-        </div>
-      </div>
-    </article><!-- /block-news-new -->
+          <div class="row pagi text-center">
+             {{ $articlesArr->links() }}
+          </div>
+       </section>
+    </div>       
 
-  </section><!-- /block-site-left -->
-@endsection
-  @section('javascript_page')
+    </div>
+@stop
+@section('javascript_page')
   
-@endsection
+@stop

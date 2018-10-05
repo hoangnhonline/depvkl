@@ -9,7 +9,9 @@ use App\Models\ArticlesCate;
 use App\Models\Articles;
 use App\Helpers\simple_html_dom;
 use App\Models\MetaData;
-
+use App\Models\Tag;
+use App\Models\TagObjects;
+use App\Models\Settings;
 use Helper, File, Session, Auth;
 use Mail;
 
@@ -120,11 +122,42 @@ class NewsController extends Controller
             }   
             $socialImage = $detail->image_url; 
             $cateDetail = ArticlesCate::find($detail->cate_id);
-           
-            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'cateDetail', 'video_url', 'poster_url'));
+            $tagSelected = Articles::getListTag($id);
+            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'cateDetail', 'video_url', 'poster_url', 'tagSelected'));
         }else{
             return view('erros.404');
         }
+    }
+    public function tagDetail(Request $request){
+        $slug = $request->slug;
+        $detail = Tag::where('slug', $slug)->first();
+        //dd($detail->type);
+        if(!$detail){
+            return redirect()->route('home');
+        }
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        
+            $articlesArr = (object)[];
+            $listId = [];
+            $listId = TagObjects::where(['type' => 1, 'tag_id' => $detail->id])->lists('object_id');
+            if($listId){
+                $listId = $listId->toArray();
+            }
+            if(!empty($listId)){
+                $articlesArr = Articles::whereIn('id', $listId)->orderBy('id', 'desc')->where('cate_id', '<>', 999)->paginate(20);
+            }  
+
+            if( $detail->meta_id > 0){
+               $seo = MetaData::find( $detail->meta_id )->toArray();
+               $seo['title'] = $seo['title'] != '' ? $seo['title'] : 'Tag - '. $detail->name;
+               $seo['description'] = $seo['description'] != '' ? $seo['description'] : 'Tag - '. $detail->name;
+               $seo['keywords'] = $seo['keywords'] != '' ? $seo['keywords'] : 'Tag - '. $detail->name;
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = 'Tag - '. $detail->name;
+            }  
+            
+            return view('frontend.news.tag', compact('title', 'articlesArr', 'seo', 'socialImage', 'detail', 'widgetProduct'));
+        
     }
 }
 

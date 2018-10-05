@@ -139,7 +139,7 @@ class ArticlesController extends Controller
     }
     public function storeMeta( $id, $meta_id, $dataArr ){
        
-        $arrData = [ 'title' => $dataArr['meta_title'], 'description' => $dataArr['meta_description'], 'keywords'=> $dataArr['meta_keywords'], 'custom_text' => $dataArr['custom_text'], 'updated_user' => Auth::user()->id ];
+        $arrData = [ 'title' => $dataArr['meta_title'], 'description' => $dataArr['meta_description'], 'custom_text' => $dataArr['custom_text'], 'updated_user' => Auth::user()->id ];
         if( $meta_id == 0){
             $arrData['created_user'] = Auth::user()->id;            
             $rs = MetaData::create( $arrData );

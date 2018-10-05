@@ -19,6 +19,6 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);   
     Route::get('{slug}', ['as' => 'cate', 'uses' => 'NewsController@newsList']);    
     Route::get('{slug}-{id}.html', ['as' => 'detail', 'uses' => 'NewsController@newsDetail']);
-
+    Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'NewsController@tagDetail']);
 });
 
