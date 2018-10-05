@@ -48,11 +48,6 @@
                 </div>
                 
                 <div class="form-group">
-                  <label>Facebook</label>
-                  <input type="text" class="form-control" name="facebook_fanpage" id="facebook_fanpage" value="{{ $settingArr['facebook_fanpage'] }}">
-                </div>
-                
-                <div class="form-group">
                   <label>Verify WOT</label>
                   <input type="text" class="form-control" name="wot" id="wot" value="{{ $settingArr['wot'] }}">
                 </div>
