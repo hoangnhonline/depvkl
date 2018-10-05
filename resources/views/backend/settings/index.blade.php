@@ -78,16 +78,8 @@
                   </div>
                   <div style="clear:both"></div>
                 </div>
-                <div style="clear:both"></div> 
-                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Favicon </label>    
-                  <div class="col-md-9">
-                    <img id="thumbnail_favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/assets/admin/dist/img/img.png') }}" class="img-favicon" width="50">
-                 
-                    <button class="btn btn-default btn-sm  btnSingleUpload" data-set="favicon" data-image="thumbnail_favicon"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
-                  </div>
-                  <div style="clear:both"></div>
-                </div>
+               
+                
                 <div style="clear:both"></div> 
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Banner ( og:image ) </label>    
@@ -138,7 +130,7 @@
       <!--/.col (left) -->      
     </div>
 <input type="hidden" name="logo" id="logo" value="{{ $settingArr['logo'] }}"/>
-<input type="hidden" name="favicon" id="favicon" value="{{ $settingArr['favicon'] }}"/> 
+
 <input type="hidden" name="banner" id="banner" value="{{ $settingArr['banner'] }}"/>
 
     </form>
