@@ -14,7 +14,7 @@
        <meta property="og:title" content="@yield('title')" />
        <meta property="og:description" content="@yield('site_description')" />
        <meta property="og:url" content="{{ url()->current() }}" />
-       <meta property="og:site_name" content="depvkl.us" />
+       <meta property="og:site_name" content="lotontv.com" />
        <?php $socialImage = isset($socialImage) ? $socialImage : $settingArr['banner']; ?>
        <meta property="og:image" content="{{ Helper::showImage($socialImage) }}" />
        <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -47,7 +47,7 @@
          <!-- HEADER -->
          <div class="row header-top">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8">
-               <h1><a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logox.png') }}" class="main-logo img-responsive" alt="lotontv.com" title="lotontv.com"></a></h1>
+               <h1><a class="main-logo" href="{{ route('home') }}"><img src="{{ URL::asset('public/assets/img/main-logo.png') }}" class="main-logo img-responsive" alt="lotontv.com" title="lotontv.com"></a></h1>
             </div>
             <?php 
             $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])->orderBy('display_order', 'asc')->get();

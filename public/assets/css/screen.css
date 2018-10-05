@@ -1743,7 +1743,7 @@ span.join-date {
 /*************************************/
 @media (min-width: 768px) and (max-width: 1024px) {
 		.right-box {padding:40px 90px 0 0;}
-		.navbar-default .navbar-toggle { position:absolute; right:0; top:-103px;}
+		.navbar-default .navbar-toggle { position:absolute; right:0; top:-70px;}
         .navbar-nav .open .dropdown-menu {
             position: static;
             float: none;

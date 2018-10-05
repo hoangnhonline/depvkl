@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ArticlesCate;
 use App\Models\Articles;
 use App\Helpers\simple_html_dom;
+use App\Models\MetaData;
+
 use Helper, File, Session, Auth;
 use Mail;
 
@@ -38,8 +40,7 @@ class NewsController extends Controller
 
         $detail = Articles::find($id);
         if($detail->is_gg == 1 && $detail->encode_link != null){                
-            //dd(Helper::encodeLink('https://photos.google.com/share/AF1QipMy4juIoha9iB9m4N-bFOgkcZVaqUYFdXRV2dKsEdxvE3aNA_871sS1Z8dwF0H3VA/photo/AF1QipN_zfzjwurxiKlIzYTCpkOsQFeFiL2LJqae7EvO?key=bnlqakpWOTluQ01YeWktNU5zdHhSSUZfbEJpdFZn'));
-            //dd(strlen($detail->encode_link));
+          
             $decodeLink = Helper::decodeLink($detail->encode_link);
             //dd($decodeLink);
             $tmp = Helper::getPhotoGoogle( $decodeLink);
@@ -54,9 +55,7 @@ class NewsController extends Controller
             curl_setopt( $ch, CURLOPT_URL, $detail->video_url );
             curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-            //if(strpos($origin_url, 'xvideos') > 0 || strpos($origin_url, 'xnxx.com') > 0){
-            //curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3B48b Safari/419.3');    
-            //}      
+             
             $result = curl_exec($ch);            
             $tmp = explode('"videoUrl":"', $result);
             if(isset($tmp[2])){
@@ -108,16 +107,20 @@ class NewsController extends Controller
               
         //}
         if( $detail ){           
-
+           
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
 
             $hotArr = Articles::where( ['cate_id' => $detail->cate_id, 'is_hot' => 1] )->where('id', '<>', $id)->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
             $otherArr = Articles::where( ['cate_id' => $detail->cate_id] )->where('id', '<>', $id)->where('status', 1)->orderBy('id', 'desc')->limit(4)->get();
-            $seo['title'] = $detail->meta_title ? $detail->meta_title : $detail->title;
-            $seo['description'] = $detail->meta_description ? $detail->meta_description : $detail->title;
-            $seo['keywords'] = $detail->meta_keywords ? $detail->meta_keywords : $detail->title;
+            if( $detail->meta_id > 0){
+               $seo = MetaData::find( $detail->meta_id )->toArray();
+               $seo['title'] = $seo['title'] ? $seo['title'] : $detail->title;
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = $detail->title;
+            }   
             $socialImage = $detail->image_url; 
             $cateDetail = ArticlesCate::find($detail->cate_id);
+           
             return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'cateDetail', 'video_url', 'poster_url'));
         }else{
             return view('erros.404');

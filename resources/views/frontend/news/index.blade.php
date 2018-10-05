@@ -33,6 +33,7 @@
                 <h1 class="icon"><i class="fa fa-trophy" aria-hidden="true"></i>{!! $cateDetail->name !!}</h1>
                 <!-- VIDEO POSTS ROW -->
                 <div class="row">
+                  <p class="col-md-12" style="margin-bottom: 20px">{{ $cateDetail->description }}</p>
                     @foreach( $articlesArr as $post )
                    <article class="col-lg-3 col-md-6 col-sm-4">
                       <!-- POST L size -->

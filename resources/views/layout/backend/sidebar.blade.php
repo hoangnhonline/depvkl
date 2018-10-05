@@ -28,18 +28,26 @@
         <ul class="treeview-menu">
           <li {{ in_array(\Request::route()->getName(), ['articles.edit', 'articles.index']) ? "class=active" : "" }}><a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> Video</a></li>
           <li {{ in_array(\Request::route()->getName(), ['articles.create']) ? "class=active" : "" }} ><a href="{{ route('articles.create', ['cate_id' => 1]) }}"><i class="fa fa-circle-o"></i> New video</a></li>
-          @if(Auth::user()->role == 3)
+          @if(Auth::user()->role == 1)
         <li {{ in_array(\Request::route()->getName(), ['articles-cate.create', 'articles-cate.index', 'articles-cate.edit']) ? "class=active" : "" }} ><a href="{{ route('articles-cate.index') }}"><i class="fa fa-circle-o"></i> Category</a></li>      
         @endif    
         </ul>
        
       </li>      
         
-      @if(Auth::user()->role == 3)
+      @if(Auth::user()->role == 1)
       <li {{ in_array(\Request::route()->getName(), ['banner.list', 'banner.edit', 'banner.create']) ? "class=active" : "" }}>
         <a href="{{ route('banner.list') }}">
           <i class="fa fa-file-image-o"></i> 
           <span>Banner</span>          
+        </a>       
+      </li>      
+      @endif
+      @if(Auth::user()->role == 1)
+      <li {{ in_array(\Request::route()->getName(), ['settings.index', 'settings.edit']) ? "class=active" : "" }}>
+        <a href="{{ route('settings.index') }}">
+          <i class="fa fa-file-image-o"></i> 
+          <span>Settings</span>          
         </a>       
       </li>      
       @endif
