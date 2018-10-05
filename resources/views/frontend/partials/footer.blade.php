@@ -22,8 +22,8 @@
          <div class="row copyright-bottom text-center">
             <div class="col-md-12 text-center">
               
-               <p>&copy; © Copyright 2018 - Lò Tôn TV. All Rights Reserved</p>
-               <a href="{{ route('home') }}" title="depvkl.us">Tất cả phim được tổng hợp từ nhiều nguồn trên internet....Chúng tôi sẽ gở bỏ những phim vi phạm bản quyền theo yêu cầu của nhà sản xuất. Xem phim sex mới, hỗ trợ xem phim sex trên điện thoại iphone, ipad, android...miễn phí với nhiều thể loại đặc sắc. Liên Hệ: lotontv@gmail.com </a>
+               <p>{!! $settingArr['title_footer'] !!}</p>
+               <a href="{{ route('home') }}" title="{!! $settingArr['site_name'] !!}">{!! $settingArr['content_footer'] !!}</a>
             </div>
          </div>
       </footer>

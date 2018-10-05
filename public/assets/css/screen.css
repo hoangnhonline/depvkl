@@ -1931,3 +1931,27 @@ span.join-date {
     .auto-clear .col-xs-4:nth-child(3n+1){clear:left;}
     .auto-clear .col-xs-6:nth-child(odd){clear:left;}
 }
+.hero-unit {
+  margin: 0 auto 0 auto;
+}
+.hero-unit video {
+  width: 100%;
+}
+@media only screen and (max-width: 768px)  {
+.navbar{
+  min-height: 0px;
+  margin-bottom: 0px;
+}
+.header-top{
+  padding-top: 0px;
+}
+}
+.main-logo{
+margin-top: 0px;
+margin-bottom: 0px;
+}
+@media only screen and (max-width: 480px){
+.navbar-default .navbar-toggle {   
+    top: -70px;
+}
+}

@@ -21,8 +21,8 @@
        <meta name="twitter:card" content="summary" />
        <meta name="twitter:description" content="@yield('site_description')" />
        <meta name="twitter:title" content="@yield('title')" /> 
-       <meta name="norton-safeweb-site-verification" content="" />       
-       <meta name="wot-verification" content=""/>
+       <meta name="norton-safeweb-site-verification" content="{{ $settingArr['norton'] }}" />       
+       <meta name="wot-verification" content="{{ $settingArr['wot'] }}" />
        <meta name="twitter:image" content="{{ Helper::showImage($socialImage) }}" />
       <link rel="icon" href="{{ URL::asset('public/assets/images/favicon.ico') }}" type="image/x-icon">
 
@@ -86,33 +86,7 @@
          $(".nav .dropdown").hover(function() {
            $(this).find(".dropdown-toggle").dropdown("toggle");
          });
-      </script>
-      <style type="text/css">
-      .hero-unit {
-          margin: 0 auto 0 auto;
-      }
-      .hero-unit video {
-          width: 100%;
-      }
-      @media only screen and (max-width: 768px)  {
-        .navbar{
-          min-height: 0px;
-          margin-bottom: 0px;
-        }
-        .header-top{
-          padding-top: 0px;
-        }
-      }
-      .main-logo{
-        margin-top: 0px;
-        margin-bottom: 0px;
-      }
-      @media only screen and (max-width: 480px){
-        .navbar-default .navbar-toggle {   
-            top: -70px;
-        }
-      }
-      </style>
+      </script>      
       @yield('javascript_page')
 
    </body>

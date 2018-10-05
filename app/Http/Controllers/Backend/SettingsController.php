@@ -70,14 +70,12 @@ class SettingsController  extends Controller
     	$this->validate($request,[            
             'site_name' => 'required',            
             'site_title' => 'required',            
-            'site_description' => 'required',            
-            'site_keywords' => 'required',                                    
+            'site_description' => 'required',
         ],
         [            
             'site_name.required' => 'Bạn chưa nhập tên site',            
             'site_title.required' => 'Bạn chưa nhập meta title',
-            'site_description.required' => 'Bạn chưa nhập meta desciption',
-            'site_keywords.unique' => 'Bạn chưa nhập meta keywords.'
+            'site_description.required' => 'Bạn chưa nhập meta desciption',            
         ]);  
 
     	
