@@ -88,6 +88,18 @@
          });
       </script>      
       @yield('javascript_page')
-
+<div class="Recipepod">
+  <div itemscope itemtype="http://schema.org/Recipe">
+      <span itemprop="name">@yield('title')</span>
+      <span itemprop="description">@yield('site_description')</span>
+      <img itemprop="image" src="{{ Helper::showImage($socialImage) }}" alt="@yield('title')">
+      @if($routeName != 'detail')
+      <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+          <span itemprop="ratingValue">9</span>/<span itemprop="bestRating">10</span>
+          <span itemprop="reviewCount">999</span> bài đánh giá
+      </div>
+      @endif
+  </div>
+</div>
    </body>
 </html>

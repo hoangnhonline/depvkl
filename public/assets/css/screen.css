@@ -1955,3 +1955,7 @@ margin-bottom: 0px;
     top: -70px;
 }
 }
+.Recipepod {
+    display: none;
+    height: 0;
+}
