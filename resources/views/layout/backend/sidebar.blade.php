@@ -35,22 +35,21 @@
        
       </li>      
         
-      @if(Auth::user()->role == 1)
+
       <li {{ in_array(\Request::route()->getName(), ['banner.list', 'banner.edit', 'banner.create']) ? "class=active" : "" }}>
         <a href="{{ route('banner.list') }}">
           <i class="fa fa-file-image-o"></i> 
           <span>Banner</span>          
         </a>       
       </li>      
-      @endif
-      @if(Auth::user()->role == 1)
+     
       <li {{ in_array(\Request::route()->getName(), ['settings.index', 'settings.edit']) ? "class=active" : "" }}>
         <a href="{{ route('settings.index') }}">
           <i class="fa fa-file-image-o"></i> 
           <span>Settings</span>          
         </a>       
       </li>      
-      @endif
+      
       <!--<li class="header">LABELS</li>
       <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
       <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
