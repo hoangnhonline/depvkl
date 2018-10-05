@@ -72,11 +72,9 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Logo </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_logo" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-logo" width="150" >
-                    
-                    <input type="file" id="file-logo" style="display:none" />
+                    <img id="thumbnail_logo" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/assets/admin/dist/img/img.png') }}" class="img-logo" width="150" >
                  
-                    <button class="btn btn-default btn-sm" id="btnUploadLogo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnSingleUpload" data-set="logo" data-image="thumbnail_logo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -84,11 +82,9 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Favicon </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="50">
-                    
-                    <input type="file" id="file-favicon" style="display:none" />
+                    <img id="thumbnail_favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/assets/admin/dist/img/img.png') }}" class="img-favicon" width="50">
                  
-                    <button class="btn btn-default btn-sm" id="btnUploadFavicon" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm  btnSingleUpload" data-set="favicon" data-image="thumbnail_favicon"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -96,11 +92,9 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Banner ( og:image ) </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_banner" src="{{ $settingArr['banner'] ? Helper::showImage($settingArr['banner']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-banner" width="200">
-                    
-                    <input type="file" id="file-banner" style="display:none" />
+                    <img id="thumbnail_banner" src="{{ $settingArr['banner'] ? Helper::showImage($settingArr['banner']) : URL::asset('public/assets/admin/dist/img/img.png') }}" class="img-banner" width="200">
                  
-                    <button class="btn btn-default btn-sm" id="btnUploadBanner" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnSingleUpload" data-set="banner" data-image="thumbnail_banner" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -143,12 +137,9 @@
       </div>
       <!--/.col (left) -->      
     </div>
-<input type="hidden" name="logo" id="logo" value="{{ $settingArr['logo'] }}"/>          
-<input type="hidden" name="logo_name" id="logo_name" value="{{ old('logo_name') }}"/>
-<input type="hidden" name="favicon" id="favicon" value="{{ $settingArr['favicon'] }}"/>          
-<input type="hidden" name="favicon_name" id="favicon_name" value="{{ old('favicon_name') }}"/>
-<input type="hidden" name="banner" id="banner" value="{{ $settingArr['banner'] }}"/>          
-<input type="hidden" name="banner_name" id="banner_name" value="{{ old('banner_name') }}"/>
+<input type="hidden" name="logo" id="logo" value="{{ $settingArr['logo'] }}"/>
+<input type="hidden" name="favicon" id="favicon" value="{{ $settingArr['favicon'] }}"/> 
+<input type="hidden" name="banner" id="banner" value="{{ $settingArr['banner'] }}"/>
 
     </form>
     <!-- /.row -->
