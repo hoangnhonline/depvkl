@@ -43,7 +43,7 @@ class ArticlesController extends Controller
             $query->where('created_user', Auth::user()->id);
         }
         if( $title != ''){
-            $query->where('alias', 'LIKE', '%'.$title.'%');
+            $query->where('title', 'LIKE', '%'.$title.'%');
         }
         if( $site_name != ''){
             $query->where('site_name', $site_name);
