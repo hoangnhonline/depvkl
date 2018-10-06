@@ -46,13 +46,13 @@
                          <i class="fa fa-star-half"></i>
                       </div>
                    </div>
-                   <ul class="social">
+                   <!-- <ul class="social">
                       <li class="social-facebook"><a href="#" class="fa fa-facebook social-icons"></a></li>
                       <li class="social-google-plus"><a href="#" class="fa fa-google-plus social-icons"></a></li>
                       <li class="social-twitter"><a href="#" class="fa fa-twitter social-icons"></a></li>
                       <li class="social-youtube"><a href="#" class="fa fa-youtube social-icons"></a></li>
                       <li class="social-rss"><a href="#" class="fa fa-rss social-icons"></a></li>
-                   </ul>
+                   </ul> -->
                    @if($tagSelected->count() > 0)
                    <ul class="footer-tags">
                       @foreach($tagSelected as $tag)                      
