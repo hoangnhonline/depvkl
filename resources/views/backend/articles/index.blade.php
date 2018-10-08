@@ -91,7 +91,7 @@
               <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>       
                 <td>
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
+                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_urls)}}" width="145">
                 </td>        
                 <td>                  
                   <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>

@@ -102,22 +102,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('{id}/destroy', ['as' => 'district.destroy', 'uses' => 'DistrictController@destroy']);
     });
     
-    Route::group(['prefix' => 'cart-product'], function () {
-        Route::get('/', ['as' => 'cart-product.index', 'uses' => 'CartProductController@index']);
-        Route::get('/create', ['as' => 'cart-product.create', 'uses' => 'CartProductController@create']);
-        Route::post('/store', ['as' => 'cart-product.store', 'uses' => 'CartProductController@store']);
-        Route::get('{id}/edit',   ['as' => 'cart-product.edit', 'uses' => 'CartProductController@edit']);
-        Route::post('/update', ['as' => 'cart-product.update', 'uses' => 'CartProductController@update']);
-        Route::get('{id}/destroy', ['as' => 'cart-product.destroy', 'uses' => 'CartProductController@destroy']);
-    });
-    Route::group(['prefix' => 'user-work'], function () {
-        Route::get('/', ['as' => 'user-work.index', 'uses' => 'UserWorkController@index']);
-        Route::get('/create', ['as' => 'user-work.create', 'uses' => 'UserWorkController@create']);
-        Route::post('/store', ['as' => 'user-work.store', 'uses' => 'UserWorkController@store']);
-        Route::get('{id}/edit',   ['as' => 'user-work.edit', 'uses' => 'UserWorkController@edit']);
-        Route::post('/update', ['as' => 'user-work.update', 'uses' => 'UserWorkController@update']);
-        Route::get('{id}/destroy', ['as' => 'user-work.destroy', 'uses' => 'UserWorkController@destroy']);
-    });
     Route::group(['prefix' => 'pages'], function () {
         Route::get('/', ['as' => 'pages.index', 'uses' => 'PagesController@index']);
         Route::get('/create', ['as' => 'pages.create', 'uses' => 'PagesController@create']);
@@ -262,22 +246,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('/edit',   ['as' => 'banner.edit', 'uses' => 'BannerController@edit']);
         Route::post('/update', ['as' => 'banner.update', 'uses' => 'BannerController@update']);
         Route::get('{id}/destroy', ['as' => 'banner.destroy', 'uses' => 'BannerController@destroy']);
-    });
-    Route::group(['prefix' => 'product'], function () {
-        Route::get('/', ['as' => 'product.index', 'uses' => 'ProductController@index']); 
-        Route::get('/kygui', ['as' => 'product.kygui', 'uses' => 'ProductController@kygui']);        
-        Route::get('/ajax-get-detail-product', ['as' => 'ajax-get-detail-product', 'uses' => 'ProductController@ajaxDetail']);        
-        Route::get('/create/', ['as' => 'product.create', 'uses' => 'ProductController@create']);        
-        Route::post('/store', ['as' => 'product.store', 'uses' => 'ProductController@store']);        
-        Route::get('{id}/edit',   ['as' => 'product.edit', 'uses' => 'ProductController@edit']);
-        Route::post('/update', ['as' => 'product.update', 'uses' => 'ProductController@update']);       
-        Route::post('/save-order-hot', ['as' => 'product.save-order-hot', 'uses' => 'ProductController@saveOrderHot']);       
-        Route::get('{id}/destroy', ['as' => 'product.destroy', 'uses' => 'ProductController@destroy']);
-        Route::get('/ajax-get-tien-ich', ['as' => 'product.ajax-get-tien-ich', 'uses' => 'ProductController@ajaxGetTienIch']);
-        Route::get('{id}/customer-join-sale', ['as' => 'product.customer-join-sale', 'uses' => 'ProductController@customerJoinSale']);
-        Route::post('ajax-update-customer-join-sale', ['as' => 'product.ajax-update-customer-join-sale', 'uses' => 'ProductController@ajaxUpdateCustomerJoinSale']);
-
-    });
+    });    
     Route::post('/tmp-upload', ['as' => 'image.tmp-upload', 'uses' => 'UploadController@tmpUpload']);
 
     Route::post('/tmp-upload-multiple', ['as' => 'image.tmp-upload-multiple', 'uses' => 'UploadController@tmpUploadMultiple']);
