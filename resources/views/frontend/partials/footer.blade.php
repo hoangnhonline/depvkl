@@ -23,7 +23,7 @@
             <div class="col-md-12 text-center">
               
                <p>{!! $settingArr['title_footer'] !!}</p>
-               <a href="{{ route('home') }}" title="{!! $settingArr['site_name'] !!}">{!! $settingArr['content_footer'] !!}</a>
+               {!! $settingArr['content_footer'] !!}
             </div>
          </div>
       </footer>
