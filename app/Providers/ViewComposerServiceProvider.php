@@ -49,14 +49,18 @@ class ViewComposerServiceProvider extends ServiceProvider
         	$routeName = \Request::route()->getName();
         	//import
         	$tmp = Import::first();
-        	if($tmp->date_import != date('Y-m-d')){        		
+        	if($tmp->date_import != date('Y-m-d')){ 
+        		$countI = 0;       		
 	        	foreach($articleCate as $cate){        		
-	        		$list = Articles::where('cate_id', $cate->id)->where('status', 0)->limit(2)->get();
+	        		$list = Articles::where('cate_id', $cate->id)->where('status', 2)->limit(2)->get();
 	        		foreach($list as $ar){
+	        			$countI++;
 	        			$ar->update(['status'=> 1]);
 	        		}
 	        	}
-	        	$tmp->update(['date_import' => date('Y-m-d')]);
+	        	if($countI > 6){
+	        		$tmp->update(['date_import' => date('Y-m-d')]);
+	        	}	        	
         	}
 			$view->with( ['settingArr' => $settingArr, 
 			'articleCate' => $articleCate,

@@ -39,7 +39,7 @@
       <![endif]-->
       <link href="{{ URL::asset('public/assets/css/lity.css') }}" rel="stylesheet">
      
-       @yield('css_page')
+       @yield('css_page')	  		
    </head>
    <body>   
       <!-- HOME 1 -->
